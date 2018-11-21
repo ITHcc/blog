@@ -13,7 +13,13 @@ class SystemController extends Controller
      */
     public function index()
     {
-        return view("admin.system.index");
+        
+
+        return view("admin.system.index",[
+            "blogs"=>\App\Blog::count(),
+            "categorys"=>\App\Category::count(),
+            "tags"=>\App\Tag::count(),
+        ]);
     }
 
     /**

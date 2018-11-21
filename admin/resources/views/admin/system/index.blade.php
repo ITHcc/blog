@@ -13,7 +13,7 @@
     <body>
     <div class="x-body layui-anim layui-anim-up">
         <blockquote class="layui-elem-quote">欢迎管理员：
-            <span class="x-red">test</span>！当前时间:2018-04-25 20:50:53</blockquote>
+            <span class="x-red">admin</span>！当前时间:{{date("Y-m-d H:i:s")}}</blockquote>
         <fieldset class="layui-elem-field">
             <legend>数据统计</legend>
             <div class="layui-field-box">
@@ -23,46 +23,32 @@
                             <div class="layui-carousel x-admin-carousel x-admin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none" style="width: 100%; height: 90px;">
                                 <div carousel-item="">
                                     <ul class="layui-row layui-col-space10 layui-this">
-                                        <li class="layui-col-xs2">
+                                        <li class="layui-col-xs3">
                                             <a href="javascript:;" class="x-admin-backlog-body">
                                                 <h3>文章数</h3>
                                                 <p>
-                                                    <cite>66</cite></p>
+                                                    <cite>{{$blogs}}</cite></p>
                                             </a>
                                         </li>
-                                        <li class="layui-col-xs2">
+                                        <li class="layui-col-xs3">
                                             <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>会员数</h3>
+                                                <h3>访问数</h3>
                                                 <p>
-                                                    <cite>12</cite></p>
+                                                    <cite>0</cite></p>
                                             </a>
                                         </li>
-                                        <li class="layui-col-xs2">
+                                        <li class="layui-col-xs3">
                                             <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>回复数</h3>
+                                                <h3>分类数</h3>
                                                 <p>
-                                                    <cite>99</cite></p>
+                                                    <cite>{{$categorys}}</cite></p>
                                             </a>
                                         </li>
-                                        <li class="layui-col-xs2">
+                                        <li class="layui-col-xs3">
                                             <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>商品数</h3>
+                                                <h3>标签数</h3>
                                                 <p>
-                                                    <cite>67</cite></p>
-                                            </a>
-                                        </li>
-                                        <li class="layui-col-xs2">
-                                            <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>文章数</h3>
-                                                <p>
-                                                    <cite>67</cite></p>
-                                            </a>
-                                        </li>
-                                        <li class="layui-col-xs2">
-                                            <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>文章数</h3>
-                                                <p>
-                                                    <cite>6766</cite></p>
+                                                    <cite>{{$tags}}</cite></p>
                                             </a>
                                         </li>
                                     </ul>
@@ -76,7 +62,7 @@
         <fieldset class="layui-elem-field">
             <legend>系统通知</legend>
             <div class="layui-field-box">
-                <table class="layui-table" lay-skin="line">
+                {{-- <table class="layui-table" lay-skin="line">
                     <tbody>
                         <tr>
                             <td >
@@ -89,7 +75,7 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table> --}}
             </div>
         </fieldset>
         <fieldset class="layui-elem-field">
@@ -102,31 +88,28 @@
                             <td>1.0.180420</td></tr>
                         <tr>
                             <th>服务器地址</th>
-                            <td>x.xuebingsi.com</td></tr>
+                            <td>{{$_SERVER['HTTP_HOST']}}</td></tr>
                         <tr>
                             <th>操作系统</th>
-                            <td>WINNT</td></tr>
+                            <td>{{php_uname('s')}}</td></tr>
                         <tr>
                             <th>运行环境</th>
-                            <td>Apache/2.4.23 (Win32) OpenSSL/1.0.2j mod_fcgid/2.3.9</td></tr>
+                            <td>{{PHP_SAPI}}</td></tr>
                         <tr>
                             <th>PHP版本</th>
-                            <td>5.6.27</td></tr>
+                            <td>{{PHP_VERSION}}</td></tr>
                         <tr>
                             <th>PHP运行方式</th>
-                            <td>cgi-fcgi</td></tr>
+                            <td>{{php_sapi_name()}}</td></tr>
                         <tr>
-                            <th>MYSQL版本</th>
-                            <td>5.5.53</td></tr>
-                        <tr>
-                            <th>ThinkPHP</th>
-                            <td>5.0.18</td></tr>
+                            <th>Laravel版本</th>
+                            <td>{{app()::VERSION}}</td></tr>
                         <tr>
                             <th>上传附件限制</th>
-                            <td>2M</td></tr>
+                            <td>{{get_cfg_var ("upload_max_filesize")?get_cfg_var ("upload_max_filesize"):"不允许上传附件"}}</td></tr>
                         <tr>
                             <th>执行时间限制</th>
-                            <td>30s</td></tr>
+                            <td>{{get_cfg_var("max_execution_time")."s"}}</td></tr>
                         <tr>
                             <th>剩余空间</th>
                             <td>86015.2M</td></tr>
@@ -141,12 +124,12 @@
                     <tbody>
                         <tr>
                             <th>版权所有</th>
-                            <td>xxxxx(xxxx)
-                                <a href="http://www.xxx.com/" class='x-a' target="_blank">访问官网</a></td>
+                            <td>Blog系统(Hcc)
+                                <a href="http://www.root2.cn/" class='x-a' target="_blank">访问官网</a></td>
                         </tr>
                         <tr>
                             <th>开发者</th>
-                            <td>马志斌(113664000@qq.com)</td></tr>
+                            <td>怀闯闯(847404572@qq.com)</td></tr>
                     </tbody>
                 </table>
             </div>

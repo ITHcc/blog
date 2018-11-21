@@ -92,6 +92,10 @@ Route::prefix('v1')->group(function () {
 
     //标签
     Route::get("/tags",function(){
-        return \App\Tag::all();
+        $data = \App\Tag::all();
+        foreach($data as $v){
+            $v['count'] = count($v->blog);
+        }
+        return $data;
     });
 });
