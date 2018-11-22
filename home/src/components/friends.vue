@@ -4,7 +4,7 @@
         <h1 style="color:#393D49" v-html="data.title">友情链接</h1>
         <br>
         
-        <p v-html="data.preface">开始招友链，要求前端博客，并且有20篇以上原创文章，剩下的没有要求。</p>
+        <p v-html="data.preface"></p>
         <hr class="layui-bg-green">
         <div class="content" v-html="data.content">
             

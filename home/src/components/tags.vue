@@ -5,7 +5,7 @@
         <br><hr><br>
         <ul>
             <li v-for="v in data">
-                <router-link :to="'/tagbloc/'+id" class="tag-btn">{{v.tag_name}} ({{v.count}}) </router-link>
+                <router-link :to="'/tagblog/'+v.id" class="tag-btn">{{v.tag_name}} ({{v.count}}) </router-link>
             </li>
         </ul>
     </div>

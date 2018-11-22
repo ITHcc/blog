@@ -2,6 +2,9 @@
     <div class="content-box">
         <fieldset class="layui-elem-field">
             <legend style="" class="title">{{data.title}}</legend>
+        
+            <p v-html="data.preface"></p>
+            <hr class="layui-bg-green">
             <div class="layui-field-box content" v-html="data.content"></div>
         </fieldset>
     </div>
