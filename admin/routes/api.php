@@ -74,7 +74,7 @@ Route::prefix('v1')->group(function () {
     //归档
     Route::get("/archives",function(){
         // select *,date_format(created_at, '%Y-%m')   from blog group by date_format(created_at, '%Y-%m');
-        $date = \DB::select("select date_format(created_at, '%Y-%m') date  from blog group by date_format(created_at, '%Y-%m')");
+        $date = \DB::select("select date_format(created_at, '%Y-%m') date  from blogs group by date_format(created_at, '%Y-%m')");
 
         $data = [];
         foreach($date as $k=>$v){
@@ -84,7 +84,7 @@ Route::prefix('v1')->group(function () {
             $arr = explode("-",$v['date']);
 
             $data[$k]['date'] = $v['date'];
-            $data[$k]['list'] = \DB::table("blog")->whereYear("created_at",$arr[0])->whereMonth("created_at",$arr[1])->get();
+            $data[$k]['list'] = \DB::table("blogs")->whereYear("created_at",$arr[0])->whereMonth("created_at",$arr[1])->get();
         }
         
         return $data;

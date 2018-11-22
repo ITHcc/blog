@@ -3,7 +3,7 @@ import axios from "axios"
 
 // axios.defaults.baseURL = 'http://localhost:8080/v1/'
 axios.defaults.timeout = 5000;
-axios.defaults.baseURL = "http://localhost:8000/api/v1";
+axios.defaults.baseURL = "http://api.52qy.top/api/v1";
 axios.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
     //添加头信息
