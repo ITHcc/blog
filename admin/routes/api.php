@@ -99,6 +99,12 @@ Route::prefix('v1')->group(function () {
         return $data;
     });
 
+    //找出含有指定标签的文章
+    Route::get("/tags/blog/{id}",function($id){
+        $info = \App\Tag::find($id);
+        return $info->blog;
+    });
+
 
     //关于
     Route::get("/about",function(){
