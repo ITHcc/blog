@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import index from "@/pages/index"
-  import test from "@/components/test"
   import list from "@/components/list"
   import right from "@/components/right"
   import content from "@/components/content"
@@ -11,6 +10,7 @@ import index from "@/pages/index"
   import about from "@/components/about"
   import friends from "@/components/friends"
   import cateblog from "@/components/cateBlog"
+  import tagblog from "@/components/tagBlog"
 
 Vue.use(Router)
 
@@ -70,6 +70,13 @@ export default new Router({
             right:right
           }
         },
+        {
+          path:"/tagblog/:id",
+          component:{
+            main:tagblog,
+            right:right
+          }
+        }
       ]
     }
   ]
