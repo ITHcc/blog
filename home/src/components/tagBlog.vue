@@ -44,10 +44,10 @@ export default {
     },
     mounted:function(){
         
-          //获取当前页数的文章
-            obj.getTagblog(that.$route.params.id).then((res)=>{
-                this.list = res.data;
-            })
+        //获取当前页数的文章
+        obj.getTagblog(this.$route.params.id).then((res)=>{
+            this.list = res.data;
+        })
     },
 
 

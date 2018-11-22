@@ -72,7 +72,7 @@ export default new Router({
         },
         {
           path:"/tagblog/:id",
-          component:{
+          components:{
             main:tagblog,
             right:right
           }
