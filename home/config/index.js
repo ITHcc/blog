@@ -10,15 +10,7 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      '/api': {//前端路由匹配模式
-          target: 'http://localhost:8000/api/v1/',  //后端请求服务域名和端口
-          changeOrigin: true,   //设置请求头
-          pathRewrite: {
-              '^/api': '/'   //路径重写  前端/flask-api 对应 后端/
-          },
-      }
-    },
+    proxyTable: {},
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 3000, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
