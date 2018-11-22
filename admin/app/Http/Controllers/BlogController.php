@@ -18,7 +18,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        
+
         
         $m = Blog::where("id","!=",0);
         
@@ -193,6 +193,13 @@ class BlogController extends Controller
         }
 
 
+    }
+
+    public function status($id){
+        $info = Blog::find($id);
+        $info->update([
+            "is_show"=>!$info->is_show*1
+        ]);
     }
 
     /**

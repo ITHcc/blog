@@ -26,9 +26,11 @@ Route::group(['middleware'=>"CheckAdmin"],function(){
     Route::get("/system","SystemController@index")->name("system");
 
     //banner管理
+    Route::put("/banner/status/{id}","BannerController@status")->name("banner.status");
     Route::resource("/banner","BannerController");
 
     //文章管理
+    Route::put("/blog/status/{id}","BlogController@status")->name("blog.status");
     Route::resource("/blog","BlogController");
 
     //标签管理
@@ -41,6 +43,7 @@ Route::group(['middleware'=>"CheckAdmin"],function(){
     Route::resource("/notice","NoticeController");
 
     //推荐管理
+    Route::put("/recommend/status/{id}","RecommendController@status")->name("recommend.status");
     Route::resource("/recommend","RecommendController");
 
     //关于管理

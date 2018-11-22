@@ -107,6 +107,15 @@ class RecommendController extends Controller
            
     }
 
+
+    public function status($id){
+        $info = Recommend::find($id);
+        $info->update([
+            "is_show"=>!$info->is_show*1
+        ]);
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *

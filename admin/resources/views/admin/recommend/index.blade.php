@@ -74,11 +74,11 @@
               </td>
               <td class="td-manage">
                   @if(!$v['is_show'])
-                  <a onclick="member_stop(this,'10001')" href="javascript:;"  title="隐藏">
+                  <a onclick="member_stop(this,{{$v['id']}})" href="javascript:;"  title="隐藏">
                     <i class="layui-icon">&#xe62f;</i>
                   </a>
                 @else
-                  <a onclick="member_stop(this,'10001')" href="javascript:;"  title="显示">
+                  <a onclick="member_stop(this,{{$v['id']}})" href="javascript:;"  title="显示">
                     <i class="layui-icon">&#xe601;</i>
                   </a>
                 @endif
@@ -115,22 +115,32 @@
       function member_stop(obj,id){
           layer.confirm('确认要修改吗？',function(index){
 
-              if($(obj).attr('title')=='显示'){
+              let larvelUrl = "{{  route('recommend.status',['id'=>777])  }}";
+              var url = larvelUrl.replace(777,id);
+              //发异步删除数据
+              $.ajax({
+                url:url,
+                type:"put",
+                data:{_token:"{{csrf_token()}}"},
+                success:function(data){
+                    if($(obj).attr('title')=='显示'){
 
-                //发异步把用户状态进行更改
-                $(obj).attr('title','隐藏')
-                $(obj).find('i').html('&#xe62f;');
+                      //发异步把用户状态进行更改
+                      $(obj).attr('title','隐藏')
+                      $(obj).find('i').html('&#xe62f;');
 
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已隐藏');
-                layer.msg('已隐藏!',{icon: 5,time:1000});
+                      $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已隐藏');
+                      layer.msg('已隐藏!',{icon: 5,time:1000});
 
-              }else{
-                $(obj).attr('title','显示')
-                $(obj).find('i').html('&#xe601;');
+                      }else{
+                      $(obj).attr('title','显示')
+                      $(obj).find('i').html('&#xe601;');
 
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已显示');
-                layer.msg('已显示!',{icon: 1,time:1000});
-              }
+                      $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已显示');
+                      layer.msg('已显示!',{icon: 1,time:1000});
+                    }
+                }
+              })
               
           });
       }

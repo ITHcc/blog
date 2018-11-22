@@ -106,6 +106,15 @@ class BannerController extends Controller
         $info->update($data);
     }
 
+
+    public function status($id){
+        $info = Banner::find($id);
+        $info->update([
+            "is_show"=>!$info->is_show*1
+        ]);
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *
