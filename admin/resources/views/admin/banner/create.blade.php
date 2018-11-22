@@ -31,66 +31,47 @@
   <body>
     <div class="x-body">
         <form class="layui-form" id="update" enctype="application/x-www-form-urlencoded">
-            <div class="layui-form-item">
-                    <label class="layui-form-label">
-                        <span class="x-red">*</span>推荐标题
-                    </label>
-                    <div class="layui-input-block">
-                        <input type="text" name="title" lay-verify="title|required" value="{{$info['title']}}"  autocomplete="off" placeholder="请输入标题" class="layui-input">
-                    </div>
-              </div>
-              <div class="layui-form-item">
-                    <label class="layui-form-label">
-                        <span class="x-red">*</span>推荐地址
-                    </label>
-                    <div class="layui-input-block">
-                        <input type="text" name="url" lay-verify="url|required" value="{{$info['url']}}"  autocomplete="off" placeholder="请输入标题" class="layui-input">
-                    </div>
-              </div>
-              <div class="layui-form-item">
-                    <label class="layui-form-label">
-                        <span class="x-red">*</span>是否显示
-                    </label>
-                    <div class="layui-input-block">
-                        <input type="checkbox" name="is_show" lay-skin="switch" @if($info['is_show']) checked @endif lay-text="是|否">
-                    </div>
-              </div>
-              <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>封面
-                    </label>
-                    <div class="layui-input-inline">
-                          <div class="layui-upload">
-                          <button type="button" class="layui-btn" id="test1">上传图片</button>
-                          <div class="layui-upload-list">
-                              <img class="layui-upload-img" id="demo1" src="{{$info['cover']}}">
-                              <p id="demoText"></p>
-                          </div>
-                          </div>   
-                    </div>
-              </div>
-            @csrf
-            <input type="hidden" name="cover" id="cover">
-            <div class="layui-form-item">
-                <label for="L_repass" class="layui-form-label">
+   
+          <div class="layui-form-item">
+                <label for="L_username" class="layui-form-label">
+                    <span class="x-red">*</span>banner
                 </label>
-                <button  class="layui-btn" lay-filter="add" lay-submit="">
-                    修改
-                </button>
+                <div class="layui-input-inline">
+                      <div class="layui-upload">
+                      <button type="button" class="layui-btn" id="test1">上传图片</button>
+                      <div class="layui-upload-list">
+                          <img class="layui-upload-img" id="demo1">
+                          <p id="demoText"></p>
+                      </div>
+                      </div>   
+                </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>是否显示
+            </label>
+            <div class="layui-input-block">
+                    <input type="checkbox" name="is_show" lay-skin="switch" lay-text="是|否">
             </div>
-        </form>
+         </div>
+         <div class="layui-form-item">
+            <label class="layui-form-label">排序分值</label>
+            <div class="layui-input-inline">
+              <input type="text" name="score" lay-verify="number" value="0" placeholder="分值越高,排序越前" class="layui-input">
+            </div>
+          </div>
+          @csrf
+          <input type="hidden" name="banner" id="cover">
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  添加
+              </button>
+          </div>
+      </form>
     </div>
     <script>
-      //内容编辑器
-      var E = window.wangEditor
-      var editor = new E('#editor')
-      // 或者 var editor = new E( document.getElementById('editor') )
-      editor.customConfig.onchange = function (html) {
-        // 监控变化，同步更新到 textarea
-        $("textarea[name=content]").val(html)
-      }
-      editor.create()
-      editor.txt.html($("textarea[name=content]").val());
 
       //layui
       layui.use(['form','layer','upload'], function(){
@@ -133,15 +114,17 @@
                 });
             }
         });
-
-        
         //监听提交
         form.on('submit(add)', function(data){
-      
+            if($("#cover").val()==""){
+                layer.msg('封面图片不能为空!', {icon: 5}); 
+                return false;
+            }
+
           //发异步，把数据提交给php
           $.ajax({
-              url:"{{route('recommend.update',['id'=>$info['id'] ])}}",
-              type:"put",
+              url:"{{  route('banner.store')  }}",
+              type:"post",
               data:$("#update").serialize(),
               success:function(data){
                   console.log(data);

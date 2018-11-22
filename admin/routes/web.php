@@ -25,6 +25,9 @@ Route::group(['middleware'=>"CheckAdmin"],function(){
     //系统面板
     Route::get("/system","SystemController@index")->name("system");
 
+    //banner管理
+    Route::resource("/banner","BannerController");
+
     //文章管理
     Route::resource("/blog","BlogController");
 

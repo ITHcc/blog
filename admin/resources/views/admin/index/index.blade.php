@@ -64,6 +64,15 @@
             </li>
             <li>
                 <li>
+                    <a _href="{{route('banner.index')}}">
+                        <i class="iconfont">&#xe6c5;</i>
+                        <cite>banner管理</cite>
+                    </a>
+                </li>
+
+            </li>
+            <li>
+                <li>
                     <a _href="{{route('tag.index')}}">
                         <i class="iconfont">&#xe6c5;</i>
                         <cite>标签管理</cite>

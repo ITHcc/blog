@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Recommend;
-use \App\Libs\OSS;
+use \App\Banner;
 use \App\Libs\Functions;
+use \App\Libs\OSS;
 
-class RecommendController extends Controller
+class BannerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,14 +16,13 @@ class RecommendController extends Controller
      */
     public function index()
     {
-        $data = Recommend::all();
+        $data = Banner::all();
         //获取图片的OSS地址
         foreach($data as $v){
-            if(!$v['cover']) continue;
-            $v['cover'] = Functions::getImageUrl($v['cover']);
+            if(!$v['banner']) continue;
+            $v['banner'] = Functions::getImageUrl($v['banner']);
         }
-
-        return view("admin.recommend.index",[
+        return view("admin.banner.index",[
             "data"=>$data
         ]);
     }
@@ -35,7 +34,7 @@ class RecommendController extends Controller
      */
     public function create()
     {
-        return view("admin.recommend.create");
+        return view("admin.banner.create");
     }
 
     /**
@@ -46,7 +45,9 @@ class RecommendController extends Controller
      */
     public function store(Request $request)
     {
-        Recommend::create($request->all());
+        
+        Banner::create($request->all());
+
     }
 
     /**
@@ -68,10 +69,10 @@ class RecommendController extends Controller
      */
     public function edit($id)
     {
-        $info = Recommend::find($id);
-        $info['cover'] = Functions::getImageUrl($info['cover']);
+        $info = Banner::find($id);
+        $info['banner'] = Functions::getImageUrl($info['banner']);
 
-        return view("admin.recommend.edit",[
+        return view("admin.banner.edit",[
             "info"=>$info
         ]);
     }
@@ -85,26 +86,24 @@ class RecommendController extends Controller
      */
     public function update(Request $request, $id)
     {
-           //更新文章
-           $info = Recommend::find($id);
-           $data = $request->all();
-           $data['is_show'] = $request->has('is_show')? 1 : 0;
+        //更新banner
+        $info = Banner::find($id);
+        $data = $request->all();
+        $data['is_show'] = $request->has('is_show')? 1 : 0;
 
-   
-           //判断是否上传了新图片
-           if($data['cover']==""){
-               unset($data['cover']);
-           }else{
-                //删除以前的图片
-               if($info['cover']!=""){
-                   
-                   @OSS::publicDeleteObject("hcc-blog",$info['cover']);
-                   
-               }
-           }       
-   
-           $info->update($data);
-           
+        //判断是否上传了新图片
+        if($data['banner']==""){
+            unset($data['banner']);
+        }else{
+            //删除以前的图片
+            if($info['banner']!=""){
+                
+                @OSS::publicDeleteObject("hcc-blog",$info['banner']);
+                
+            }
+        }       
+        // return $data;
+        $info->update($data);
     }
 
     /**
@@ -115,10 +114,8 @@ class RecommendController extends Controller
      */
     public function destroy($id)
     {
-        
-        $info = Recommend::find($id);
-        @OSS::publicDeleteObject("hcc-blog",$info['cover']);     
+        $info = Banner::find($id);
+        @OSS::publicDeleteObject("hcc-blog",$info['banner']);     
         $info->delete();
-
     }
 }
