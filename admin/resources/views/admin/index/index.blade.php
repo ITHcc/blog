@@ -65,7 +65,7 @@
             <li>
                 <li>
                     <a _href="{{route('recommend.index')}}">
-                        <i class="iconfont">&#xe7ce;</i>
+                        <i class="iconfont">&#xe717;</i>
                         <cite>推荐管理</cite>
                     </a>
                 </li>
