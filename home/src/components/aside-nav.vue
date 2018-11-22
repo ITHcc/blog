@@ -31,8 +31,8 @@
                   <router-link to="/tags" @click.native="jump('tags')"><i class="layui-icon layui-icon-note"></i>&nbsp;&nbsp;&nbsp;&nbsp;标签</router-link>
                 </li>
 
-                <li :class="['layui-nav-item',$store.state.navActive=='my' ? 'layui-this' : '' ]">
-                  <router-link to="/my" @click.native="jump('my')"><i class="layui-icon layui-icon-friends"></i>&nbsp;&nbsp;&nbsp;&nbsp;关于</router-link>
+                <li :class="['layui-nav-item',$store.state.navActive=='about' ? 'layui-this' : '' ]">
+                  <router-link to="/about" @click.native="jump('about')"><i class="layui-icon layui-icon-friends"></i>&nbsp;&nbsp;&nbsp;&nbsp;关于</router-link>
                 </li>
 
                 <li :class="['layui-nav-item',$store.state.navActive=='friends' ? 'layui-this' : '' ]">

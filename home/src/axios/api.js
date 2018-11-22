@@ -59,6 +59,14 @@ export default{
     getTags:() =>{
         return axios.get("/tags")
     },
+    //关于我
+    getAbout:() =>{
+        return axios.get("/about")
+    },
+    //友链
+    getFriend:() =>{
+        return axios.get("/friend")
+    },
     //获取文章
     getContent:(id) =>{
         return axios.get("/blog/content/"+id)

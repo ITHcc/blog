@@ -98,4 +98,15 @@ Route::prefix('v1')->group(function () {
         }
         return $data;
     });
+
+
+    //关于
+    Route::get("/about",function(){
+        return \App\About::find(1);
+    });
+
+    //友链
+    Route::get("/friend",function(){
+        return \App\Friend::find(1);
+    });
 });
