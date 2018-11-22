@@ -8,7 +8,7 @@ import index from "@/pages/index"
   import content from "@/components/content"
   import archives from "@/components/archives"
   import tags from "@/components/tags"
-  import my from "@/components/my"
+  import about from "@/components/about"
   import friends from "@/components/friends"
   import cateblog from "@/components/cateBlog"
 
@@ -43,9 +43,9 @@ export default new Router({
           }
         },
         {
-          path:"/my",
+          path:"/about",
           components:{
-            main:my,
+            main:about,
             right:right,
           }
         },
