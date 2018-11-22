@@ -89,6 +89,7 @@ class BannerController extends Controller
         //更新banner
         $info = Banner::find($id);
         $data = $request->all();
+
         $data['is_show'] = $request->has('is_show')? 1 : 0;
 
         //判断是否上传了新图片
@@ -102,7 +103,6 @@ class BannerController extends Controller
                 
             }
         }       
-        // return $data;
         $info->update($data);
     }
 
