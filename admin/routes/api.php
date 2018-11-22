@@ -31,7 +31,7 @@ Route::prefix('v1')->group(function () {
 
     Route::get("/blog/count",function(){
 
-        return \App\Blog::count();
+        return \App\Blog::where("is_show",1)->count();
     });
 
 
@@ -109,7 +109,7 @@ Route::prefix('v1')->group(function () {
             },
         ])
         ->find($id);
-        
+
         return $info->blog;
     });
 
