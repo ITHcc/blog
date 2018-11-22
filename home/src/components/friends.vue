@@ -1,26 +1,29 @@
 <template>
     <div class="friends-box">
 
-        <h1 style="color:#393D49">友情链接</h1>
+        <h1 style="color:#393D49" v-html="data.title">友情链接</h1>
         <br>
         
-        <p>开始招友链，要求前端博客，并且有20篇以上原创文章，剩下的没有要求。</p>
+        <p v-html="data.preface">开始招友链，要求前端博客，并且有20篇以上原创文章，剩下的没有要求。</p>
         <hr class="layui-bg-green">
-        <div class="content">
-            <ul>
-                <li>这位用户是一个自然人</li>
-                <li>这位用户使用Google搜索</li>
-                <li>这位用户说PHP是世界上最好的语言</li>
-                <li>这位用户擅长用PHP、Python制造bug</li>
-                <li>这位用户</li>
-            </ul>
+        <div class="content" v-html="data.content">
+            
         </div>
 
     </div>
 </template>
 <script>
+import obj from "@/axios/api"
 export default {
+    data:function(){
+        return {
+            data:[],
+        }
+    },
     mounted:function(){
+        obj.getFriend().then((res)=>{
+            this.data = res.data
+        })
         this.$store.commit('updateNavActive',"friends");
     }
 }
