@@ -24,8 +24,7 @@ Route::prefix('v1')->group(function () {
         $pageSize = 5;
         $start = ($page-1) * $pageSize;
 
-        return \App\Blog::offset($start)->limit($pageSize)->get();
-        
+        return \App\Blog::where("is_show",1)->orderBy("is_top","desc")->orderBy("score","desc")->offset($start)->limit($pageSize)->get();
 
     })->where('page', '\d+');
 
@@ -38,13 +37,13 @@ Route::prefix('v1')->group(function () {
 
     Route::get("/blog/content/{id}",function($id){
 
-        return \App\Blog::find($id);
+        return \App\Blog::where("is_show",1)->find($id);
     })->where("id","\d+");
     
 
     Route::get("/recommend",function(){
 
-        return \App\Recommend::all();
+        return \App\Recommend::where("is_show",1)->get();
     });
 
     //通知
@@ -61,8 +60,8 @@ Route::prefix('v1')->group(function () {
     Route::get("/category/blog/{id}/{page}",function($id,$page){
         $pageSize = 5;
         $start = ($page-1) * $pageSize;
-        $blog = \App\Blog::where("category_id",$id)->offset($start)->limit($pageSize)->get();
-        $count = \App\Blog::where("category_id",$id)->count();
+        $blog = \App\Blog::where("category_id",$id)->where("is_show",1)->offset($start)->limit($pageSize)->get();
+        $count = \App\Blog::where("category_id",$id)->where("is_show",1)->count();
 
         return [
             "blog"=>$blog,
@@ -84,7 +83,7 @@ Route::prefix('v1')->group(function () {
             $arr = explode("-",$v['date']);
 
             $data[$k]['date'] = $v['date'];
-            $data[$k]['list'] = \DB::table("blogs")->whereYear("created_at",$arr[0])->whereMonth("created_at",$arr[1])->get();
+            $data[$k]['list'] = \DB::table("blogs")->where("is_show",1)->whereYear("created_at",$arr[0])->whereMonth("created_at",$arr[1])->get();
         }
         
         return $data;
@@ -101,7 +100,16 @@ Route::prefix('v1')->group(function () {
 
     //找出含有指定标签的文章
     Route::get("/tags/blog/{id}",function($id){
-        $info = \App\Tag::find($id);
+
+        $info = \App\Tag::with([
+            //查出文章为显示状态的
+            "blog"=>function($query){
+                $query->select()
+                ->where("is_show",1);
+            },
+        ])
+        ->find($id);
+        
         return $info->blog;
     });
 
