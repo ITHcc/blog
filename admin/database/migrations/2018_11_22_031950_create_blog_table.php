@@ -18,7 +18,7 @@ class CreateBlogTable extends Migration
             $table->string("title")->comment("标题");
             $table->string('preface',2000)->nullable()->comment("前言");
             $table->text("content")->comment("内容");
-            $table->string("cover")->comment("封面");
+            $table->string("cover")->nullable()->comment("封面");
             $table->string("cover_desc")->nullable()->comment("封面描述");
             $table->unsignedInteger("category_id")->comment("分类id");
             $table->unsignedTinyInteger("is_top")->default(0)->comment("是否置顶");
