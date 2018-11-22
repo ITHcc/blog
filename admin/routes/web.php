@@ -39,6 +39,15 @@ Route::resource("/notice","NoticeController");
 
 //推荐管理
 Route::resource("/recommend","RecommendController");
+
+//关于管理
+Route::get("/about","AboutController@index")->name("about");
+Route::put("/about/update","AboutController@update")->name("about.update");
+
+//友链管理
+Route::get("/friend","FriendController@index")->name("friend");
+Route::put("/friend/update","FriendController@update")->name("friend.update");
+
 //libs
 Route::post("/upload/{filename}","UploadController@uploadImage")->name("upload_image");
 

@@ -91,6 +91,24 @@
             </li>
             <li>
                 <li>
+                    <a _href="{{route('about')}}">
+                        <i class="iconfont">&#xe6ba;</i>
+                        <cite>关于管理</cite>
+                    </a>
+                </li>
+
+            </li>
+            <li>
+                <li>
+                    <a _href="{{route('friend')}}">
+                        <i class="iconfont">&#xe6c0;</i>
+                        <cite>友链管理</cite>
+                    </a>
+                </li>
+
+            </li>
+            <li>
+                <li>
                     <a _href="{{route('recommend.index')}}">
                         <i class="iconfont">&#xe7ce;</i>
                         <cite>推荐管理</cite>
@@ -100,9 +118,9 @@
             </li>
             <li>
                 <li>
-                    <a _href="{{route('blog.index')}}">
+                    <a _href="https://tongji.baidu.com/web/welcome/login">
                         <i class="iconfont">&#xe6ae;</i>
-                        <cite>系统管理</cite>
+                        <cite>流量统计</cite>
                     </a>
                 </li>
 

@@ -60,13 +60,7 @@ class BlogController extends Controller
 
             }
         }
-        // return $data;
-        // return 1;
-        // foreach($data as $v){
-        //     var_dump($v->tags);
-        // }
-        // return ;
-        // return $data;
+
         //给分页代码添加搜索条件
         $data->start = isset($_GET['start'])? $_GET['start'] : "";
         $data->end = isset($_GET['end'])? $_GET['end'] : "";

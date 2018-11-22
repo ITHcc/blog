@@ -3,7 +3,8 @@
     <div class="my-box">
         <h1 style="color:#393D49">关于我</h1>
         <br>
-
+        <p>开始招友链，要求前端博客，并且有20篇以上原创文章，剩下的没有要求。</p>
+        <hr class="layui-bg-green">
         <div class="content">
             <ul>
                 <li>这位用户是一个自然人</li>
@@ -24,14 +25,9 @@ export default {
 }
 </script>
 <style>
-
-.my-box ul {
-    margin-left:30px;
-    font-size:16px;
-
+.my-box {
+    font-size: 16px;
+    line-height: 28px;
 }
-.my-box li {
-    list-style: disc;
-    margin-top:8px;
-}
+
 </style>
