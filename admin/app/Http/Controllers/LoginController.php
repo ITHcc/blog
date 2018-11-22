@@ -11,6 +11,8 @@ class LoginController extends Controller
         if(session("admin")) return redirect("/");
         return view("admin.login.index");
     }
+
+
     public function dologin(Request $req){
         
         $info = Admin::where("login_name",$req->login_name)->first();
@@ -30,6 +32,12 @@ class LoginController extends Controller
             ]);
         }
 
+    }
+
+    public function logout(){
+
+        session()->flush();
+        return redirect("/login");
 
     }
 }

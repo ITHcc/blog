@@ -19,6 +19,9 @@ Route::post("/dologin","LoginController@dologin")->name("dologin");
 
 Route::group(['middleware'=>"CheckAdmin"],function(){
 
+    //退出登录
+    Route::get("/logout","LoginController@logout")->name("logout");
+
     //首页
     Route::get("/","IndexController@index")->name("admin");
 
