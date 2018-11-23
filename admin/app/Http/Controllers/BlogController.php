@@ -9,6 +9,8 @@ use App\Blog;
 use App\Category;
 use App\Tag;
 use App\BlogTag;
+use Illuminate\Support\Facades\Redis;
+
 class BlogController extends Controller
 {
     /**
@@ -110,7 +112,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         //删除redis中保存的图片路径
-        \Redis::del("tmp-".$request->cover);
+        Redis::del("tmp-".$request->cover);
 
         $info = Blog::create($request->all());
 
@@ -177,7 +179,7 @@ class BlogController extends Controller
             unset($data['cover']);
         }else{
             //删除redis中保存的图片路径
-            \Redis::del("tmp-".$data['cover']);
+            Redis::del("tmp-".$data['cover']);
             //删除以前的图片
             if($info['cover']!=""){
                 
