@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use \App\Libs\Functions;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,8 +24,12 @@ Route::prefix('v1')->group(function () {
         $pageSize = 5;
         $start = ($page-1) * $pageSize;
 
-        return \App\Blog::where("is_show",1)->orderBy("is_top","desc")->orderBy("score","desc")->offset($start)->limit($pageSize)->get();
-
+        $data =  \App\Blog::where("is_show",1)->orderBy("is_top","desc")->orderBy("score","desc")->offset($start)->limit($pageSize)->get();
+        foreach($data as $v){
+            if(!$v['cover']) continue;
+            $v['cover'] = Functions::getImageUrl($v['cover']);
+        }
+        return $data;
     })->where('page', '\d+');
 
 
@@ -43,7 +47,12 @@ Route::prefix('v1')->group(function () {
 
     Route::get("/recommend",function(){
 
-        return \App\Recommend::where("is_show",1)->get();
+        $data = \App\Recommend::where("is_show",1)->get();
+        foreach($data as $v){
+            if(!$v['cover']) continue;
+            $v['cover'] = Functions::getImageUrl($v['cover']);
+        }
+        return $data;
     });
 
     //通知
@@ -62,7 +71,10 @@ Route::prefix('v1')->group(function () {
         $start = ($page-1) * $pageSize;
         $blog = \App\Blog::where("category_id",$id)->where("is_show",1)->offset($start)->limit($pageSize)->get();
         $count = \App\Blog::where("category_id",$id)->where("is_show",1)->count();
-
+        foreach($blog as $v){
+            if(!$v['cover']) continue;
+            $v['cover'] = Functions::getImageUrl($v['cover']);
+        }
         return [
             "blog"=>$blog,
             "count"=>$count
@@ -109,7 +121,7 @@ Route::prefix('v1')->group(function () {
             },
         ])
         ->find($id);
-
+        
         return $info->blog;
     });
 
