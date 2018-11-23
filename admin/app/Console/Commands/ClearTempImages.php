@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use \App\Libs\OSS;
+use Illuminate\Support\Facades\Redis;
 class ClearTempImages extends Command
 {
     /**
@@ -38,7 +39,7 @@ class ClearTempImages extends Command
     public function handle()
     {
         //监听key失效事件
-        \Redis::psubscribe(['__keyevent@0__:expired'], function($key) {
+        Redis::psubscribe(['__keyevent@0__:expired'], function($key) {
             $arr = explode("tmp-",$key);
             //判断key是否是临时图片,防止误删
             if(count($arr)>1){
