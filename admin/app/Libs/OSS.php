@@ -13,8 +13,8 @@ class OSS {
     // 经典网络 or VPC
     private $networkType = '经典网络';
     
-    private $AccessKeyId = '';
-    private $AccessKeySecret = '';
+    private $AccessKeyId = 'LTAIE2diTlXNejNu';
+    private $AccessKeySecret = 'wBeya6SEf3blukFNml53UaRRikW2ol';
     private $ossClient;
     /**
      * 私有初始化 API，非 API，不用关注
