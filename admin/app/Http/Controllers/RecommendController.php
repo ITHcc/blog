@@ -46,6 +46,8 @@ class RecommendController extends Controller
      */
     public function store(Request $request)
     {
+        //删除redis中保存的图片路径
+        \Redis::del("tmp-".$data['cover']);
         Recommend::create($request->all());
     }
 
@@ -95,6 +97,9 @@ class RecommendController extends Controller
            if($data['cover']==""){
                unset($data['cover']);
            }else{
+                //删除redis中保存的图片路径
+                \Redis::del("tmp-".$data['cover']);
+
                 //删除以前的图片
                if($info['cover']!=""){
                    

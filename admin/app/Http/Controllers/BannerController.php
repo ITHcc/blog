@@ -45,7 +45,8 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //删除redis中保存的图片路径
+        \Redis::del("tmp-".$request->banner);
         Banner::create($request->all());
 
     }
@@ -96,6 +97,8 @@ class BannerController extends Controller
         if($data['banner']==""){
             unset($data['banner']);
         }else{
+            //删除redis中保存的图片路径
+            \Redis::del("tmp-".$data['banner']);
             //删除以前的图片
             if($info['banner']!=""){
                 

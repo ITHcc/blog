@@ -67,6 +67,7 @@ Route::group(['middleware'=>"CheckAdmin"],function(){
 
 Route::get("/test",function(){
 
+
     return \App\Services\OSS::getPrivateObjectURLWithExpireTime("hcc-blog","cover/15426815562714.jpg",new \DateTime('+1 day'));
 
 

@@ -109,10 +109,13 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+        //删除redis中保存的图片路径
+        \Redis::del("tmp-".$request->cover);
+
         $info = Blog::create($request->all());
 
-         //插入文章标签
-         foreach($request->tags as $k=>$v){
+        //插入文章标签
+        foreach($request->tags as $k=>$v){
             BlogTag::create([
                 "blog_id"=>$info['id'],
                 "tag_id"=>$k
@@ -173,7 +176,9 @@ class BlogController extends Controller
         if($data['cover']==""){
             unset($data['cover']);
         }else{
-             //删除以前的图片
+            //删除redis中保存的图片路径
+            \Redis::del("tmp-".$data['cover']);
+            //删除以前的图片
             if($info['cover']!=""){
                 
                 @OSS::publicDeleteObject("hcc-blog","/".$info['cover']);
