@@ -47,7 +47,7 @@ class RecommendController extends Controller
     public function store(Request $request)
     {
         //删除redis中保存的图片路径
-        \Redis::del("tmp-".$data['cover']);
+        \Redis::del("tmp-".$request->cover);
         Recommend::create($request->all());
     }
 
