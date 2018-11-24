@@ -218,7 +218,10 @@ class BlogController extends Controller
     public function destroy($id)
     {
         $info = Blog::find($id);
-        @OSS::publicDeleteObject("hcc-blog",$info['cover']);     
+        if($info['cover']){
+            @OSS::publicDeleteObject("hcc-blog",$info['cover']);     
+
+        }
         $info->delete();
     }
 

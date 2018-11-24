@@ -92,8 +92,8 @@ export default {
     margin-top:30px;
 }
 .list_cover {
-    min-width: 95%;
-    max-width: 100%;
+    width:100%;
+    max-height:230px;
     border:1px solid #a58d8d;
     border-radius: 2px;
 }

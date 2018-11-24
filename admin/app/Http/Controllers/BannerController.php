@@ -127,7 +127,12 @@ class BannerController extends Controller
     public function destroy($id)
     {
         $info = Banner::find($id);
-        @OSS::publicDeleteObject("hcc-blog",$info['banner']);     
+        
+        if($info['banner']){
+            @OSS::publicDeleteObject("hcc-blog",$info['banner']);     
+
+        }
+
         $info->delete();
     }
 }

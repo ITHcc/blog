@@ -132,7 +132,10 @@ class RecommendController extends Controller
     {
         
         $info = Recommend::find($id);
-        @OSS::publicDeleteObject("hcc-blog",$info['cover']);     
+        if($info['cover']){
+            @OSS::publicDeleteObject("hcc-blog",$info['cover']);     
+
+        }
         $info->delete();
 
     }
