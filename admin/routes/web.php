@@ -58,7 +58,8 @@ Route::group(['middleware'=>"CheckAdmin"],function(){
     Route::put("/friend/update","FriendController@update")->name("friend.update");
 
     //libs
-    Route::post("/upload/{filename}","UploadController@uploadImage")->name("upload_image");
+    Route::post("/upload/{filename}$","UploadController@uploadImage")->name("upload_image");
+    Route::post("/editor/upload/{filename}","UploadController@editorUploadImage")->name("editor.upload");
 });
 
 
@@ -67,8 +68,14 @@ Route::group(['middleware'=>"CheckAdmin"],function(){
 
 Route::get("/test",function(){
 
-
+    return view("admin.test.create");
     return \App\Services\OSS::getPrivateObjectURLWithExpireTime("hcc-blog","cover/15426815562714.jpg",new \DateTime('+1 day'));
 
-
 });
+Route::post("/test",function(){
+    $info = \App\Blog::find(1);
+    $info->content = $_POST['content-html-code'];
+    $info->save();
+    return $_POST['content-html-code'];
+    return $_POST['preface'];
+})->name("test");

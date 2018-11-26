@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notice extends Model
 {
-    protected $fillable = ["title","content"];
+    protected $fillable = ["title","content","content_mark"];
 
     
 }

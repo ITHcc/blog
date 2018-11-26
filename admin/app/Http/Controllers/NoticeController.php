@@ -38,7 +38,10 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-        Notice::create($request->all());
+        $data = $request->all();
+        $data['content'] = $data['content-html-code'];
+        $data['content_mark'] = $data['content-markdown-doc'];
+        Notice::create($data);
     }
 
     /**
@@ -76,7 +79,11 @@ class NoticeController extends Controller
     public function update(Request $request, $id)
     {
         $info = Notice::find($id);
-        $info->update($request->all());
+        $data = $request->all();
+        $data['content'] = $data['content-html-code'];
+        $data['content_mark'] = $data['content-markdown-doc'];
+
+        $info->update($data);
     }
 
     /**

@@ -10,9 +10,9 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
-    <link href="https://cdn.bootcss.com/wangEditor/10.0.13/wangEditor.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/wangEditor/10.0.13/wangEditor.min.js"></script>
+    <link rel="stylesheet" href="/lib/editormd/css/editormd.min.css" />
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/lib/editormd/editormd.min.js"></script>
     <script type="text/javascript" src="/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/js/xadmin.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
@@ -42,8 +42,9 @@
           <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">内容</label>
             <div class="layui-input-block">
-                <div id="editor"></div>
-                <textarea name="content" id="" cols="30" rows="10" style="display: none;"></textarea>
+                <div id="content">
+                    <textarea style="display:none;">### Hello Editor.md !</textarea>
+                </div>
             </div>
           </div>
           @csrf
@@ -58,17 +59,52 @@
       </form>
     </div>
     <script>
-    //内容编辑器
-      var E = window.wangEditor
-      var editor = new E('#editor')
-      // 或者 var editor = new E( document.getElementById('editor') )
-      editor.customConfig.onchange = function (html) {
-        // 监控变化，同步更新到 textarea
-        $("textarea[name=content]").val(html)
-      }
-      editor.create()
-      editor.txt.html($("textarea[name=content]").val());
+        $(function() {
 
+            var editor = editormd({
+                id   : "content",
+                path : "/lib/editormd/lib/",
+                saveHTMLToTextarea:true,
+                height:400,
+                emoji: true,//emoji表情，默认关闭
+                taskList: true,
+                tocm: true, // Using [TOCM]
+                tex: true,// 开启科学公式TeX语言支持，默认关闭
+
+                flowChart: true,//开启流程图支持，默认关闭
+                sequenceDiagram: true,//开启时序/序列图支持，默认关闭,
+
+                dialogLockScreen : false,//设置弹出层对话框不锁屏，全局通用，默认为true
+                dialogShowMask : false,//设置弹出层对话框显示透明遮罩层，全局通用，默认为true
+                dialogDraggable : false,//设置弹出层对话框不可拖动，全局通用，默认为true
+                dialogMaskOpacity : 0.4, //设置透明遮罩层的透明度，全局通用，默认值为0.1
+                dialogMaskBgColor : "#fff",//设置透明遮罩层的背景颜色，全局通用，默认为#fff
+
+                codeFold: true,
+
+                imageUpload : true,
+                imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                imageUploadURL : "{{  route('editor.upload',['filename'=>'editormd-image-file'])  }}",
+                token:"{{csrf_token()}}",
+
+                /*上传图片成功后可以做一些自己的处理*/
+                onload: function () {
+                    //console.log('onload', this);
+                    //this.fullscreen();
+                    //this.unwatch();
+                    //this.watch().fullscreen();
+                    //this.width("100%");
+                    //this.height(480);
+                    //this.resize("100%", 640);
+                },
+
+                /**设置主题颜色*/
+
+
+            });
+
+
+        });
       //layui
       layui.use(['form','layer'], function(){
           $ = layui.jquery;

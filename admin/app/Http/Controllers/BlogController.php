@@ -113,8 +113,10 @@ class BlogController extends Controller
     {
         //删除redis中保存的图片路径
         Redis::del("tmp-".$request->cover);
-
-        $info = Blog::create($request->all());
+        $data = $request->all();
+        $data['content'] = $data['content-html-code'];
+        $data['content_mark'] = $data['content-markdown-doc'];
+        $info = Blog::create($data);
 
         //插入文章标签
         foreach($request->tags as $k=>$v){
@@ -173,7 +175,8 @@ class BlogController extends Controller
         //更新文章
         $info = Blog::find($id);
         $data = $request->all();
-
+        $data['content'] = $data['content-html-code'];
+        $data['content_mark'] = $data['content-markdown-doc'];
         //判断是否上传了新图片
         if($data['cover']==""){
             unset($data['cover']);

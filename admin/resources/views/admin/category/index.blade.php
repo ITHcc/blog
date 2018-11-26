@@ -34,7 +34,7 @@
     
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick='x_admin_show("添加标签","{{ route('category.create') }}",450,200)'><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick='x_admin_show("添加分类","{{ route('category.create') }}",450,200)'><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：{{count($data)}} 条</span>
       </xblock>
       <table class="layui-table">

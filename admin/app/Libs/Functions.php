@@ -10,5 +10,9 @@ class Functions{
         return OSS::getPrivateObjectURLWithExpireTime("hcc-blog",$path,new DateTime('+1 day'));
     }
 
+    public static function getPublicImageUrl($path){
+        if($path=="")return false;
+        return OSS::getPublicObjectURL("hcc-blog",$path);
+    }
 }
 ?>
