@@ -68,6 +68,7 @@ mysql5.6
 5. 后台
    - 在admin目录中运行composer install 安装依赖包（需要安装composer）
    - 运行php artisan serve命令,打开web服务器
+   - 修改Redis配置文件,搜索"notify-keyspace-events"修改为notify-keyspace-events=”Ex“
    - 运行nohup php artisan image:clear >> image-clear.log 2>&1 & 监听失效的key删除无主文件
 
 ## 更新
