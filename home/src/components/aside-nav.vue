@@ -8,7 +8,7 @@
             <p class="signature">专注于技术分享。</p>
         </div>
         <div class="aside-nav">
-            <ul class="layui-nav layui-nav-tree" lay-filter="">
+            <ul class="layui-nav layui-nav-tree" lay-filter="" style="margin-top:0px;">
                 <li :class="['layui-nav-item',$store.state.navActive=='index' ? 'layui-this' : '' ]">
                   <router-link to="/"><i class="layui-icon layui-icon-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;首页</router-link>
                 </li>
