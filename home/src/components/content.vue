@@ -37,7 +37,7 @@
      }
  }
  </script>
- <style >
+ <style scoped>
 
  .title {
     color:#666;
