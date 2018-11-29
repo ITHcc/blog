@@ -22,8 +22,8 @@ class OSS {
      */
     public function __construct($isInternal = false)
     {
-        $this->AccessKeyId = env("AccessKeyId");
-        $this->AccessKeySecret = env("AccessKeySecret");
+        $this->AccessKeyId = config("oss.AccessKeyId");
+        $this->AccessKeySecret = config("oss.AccessKeySecret");
         
         if ($this->networkType == 'VPC' && !$isInternal) {
         throw new Exception("VPC 网络下不提供外网上传、下载等功能");
