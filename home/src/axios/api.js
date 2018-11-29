@@ -28,7 +28,6 @@ export default{
         if(page=="" || page<=0){
             page=1;
         }
-        // return axios.get("/index/list/"+page)
         return axios.get("/blog?page="+page);
 
     },

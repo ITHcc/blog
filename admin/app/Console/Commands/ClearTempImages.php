@@ -45,7 +45,6 @@ class ClearTempImages extends Command
             if(count($arr)>1){
                 @OSS::publicDeleteObject("hcc-blog",$arr[1]);
             }
-
             $this->info("文件:".$arr[1]."------删除成功!");
             
         });
