@@ -32,7 +32,6 @@
             </article>
         </div>
         <div id="more"></div>
-        <div id="pagination"></div>
     </div>
 
 </template>
