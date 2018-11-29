@@ -63,11 +63,13 @@ export default {
                 done:function(page,next){
                     var lis = that.list;
                     obj.getIndexList(page).then((res)=>{
-                        that.$store.commit("updateIsLoding",false);
                         setTimeout(function(){
+                            that.$store.commit("updateIsLoding",false);
+
                             res.data.data.forEach(function(e){
                                 lis.push(e);
                             })
+                            
                             next("", page<res.data.last_page); //假设总页数为 10
 
                         },400)

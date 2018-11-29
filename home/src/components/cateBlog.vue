@@ -64,9 +64,10 @@ export default {
                         done:function(page,next){
                             var lis = that.list;
                             obj.getCateBlog(that.$route.params.id,page).then((res)=>{
-                                that.$store.commit("updateIsLoding",false);
 
                                 setTimeout(function(){
+                                    that.$store.commit("updateIsLoding",false);
+
                                     res.data.data.forEach(function(e){
                                         lis.push(e);
                                     })
