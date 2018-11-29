@@ -13,8 +13,8 @@ class OSS {
     // 经典网络 or VPC
     private $networkType = '经典网络';
     
-    private $AccessKeyId = 'LTAIE2diTlXNejNu';
-    private $AccessKeySecret = 'wBeya6SEf3blukFNml53UaRRikW2ol';
+    private $AccessKeyId = '';
+    private $AccessKeySecret = '';
     private $ossClient;
     /**
      * 私有初始化 API，非 API，不用关注
@@ -22,6 +22,9 @@ class OSS {
      */
     public function __construct($isInternal = false)
     {
+        $this->AccessKeyId = env("AccessKeyId");
+        $this->AccessKeySecret = env("AccessKeySecret");
+        
         if ($this->networkType == 'VPC' && !$isInternal) {
         throw new Exception("VPC 网络下不提供外网上传、下载等功能");
         }
