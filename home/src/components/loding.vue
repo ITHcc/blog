@@ -19,7 +19,7 @@ export default {
 body {
     background: rgba(0,0,0,.2);
 }
-section { width: 98%; display: inline-block; text-align: center; min-height: 700px; vertical-align: top;  border-radius: 5px; position:absolute;z-index:100;background-color:#eee;}
+section { width: 100%; display: inline-block; text-align: center; min-height: 700px; vertical-align: top;  border-radius: 5px; position:absolute;z-index:1;background-color:#eee;}
 
 @media only screen and (max-width: 600px) {
 section { min-width: 350px; }
