@@ -12,7 +12,10 @@
       
       <banner @resize="resize"></banner>
       <!-- ,backgroundColor:'#f7f7f7' -->
+      
       <div  class="layui-fluid box" ref="box" :style="{marginTop:bannerMargin,paddingTop:'20px',minHeight:'700px'}">
+        <loding  v-show="$store.state.isLoding"></loding>
+
         <div class="layui-row layui-col-space30">
             <div class="layui-col-xs12 layui-col-sm12 layui-col-md11 layui-col-lg7 layui-col-lg-offset1">
                
@@ -56,19 +59,22 @@
       </div> -->
 
       <div :class="[{'zhegai':$store.state.asideStatus}]" ></div>
+      
   </div>
 </template>
 
 <script>
 import asideNav from "@/components/aside-nav"
 import banner from "@/components/banner"
+import loding from "@/components/loding"
 
 
 export default {
   name: 'index',
   components:{
     asideNav,
-    banner
+    banner,
+    loding,
   },
   data(){
     return {

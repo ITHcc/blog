@@ -14,8 +14,8 @@
         </div>
 
         <list-header></list-header>
-        <div>
-            <article class="post" v-for="v in list">
+        <div id="post">
+            <article class="post"v-for="v in list">
                 <fieldset class="layui-elem-field layui-field-title" style="marginBottom:10px;">
                     <legend><router-link :to="'/content/'+v.id" :title="v.title">{{v.title}}</router-link></legend>
                     <div class="layui-field-box">
@@ -31,6 +31,7 @@
                 </fieldset>
             </article>
         </div>
+        <div id="more"></div>
         <div id="pagination"></div>
     </div>
 
@@ -52,35 +53,34 @@ export default {
     },
     mounted:function(){
         this.$store.commit("updateNavActive","index");
-       
+        this.$store.commit("updateIsLoding",true);
 
         var that = this;
-        obj.getIndexListCount().then((res)=>{
-            layui.use('laypage', function(){
-                that.laypage = layui.laypage;
-                that.laypage.render({
-                    elem: 'pagination', //注意，这里的 test1 是 ID，不用加 # 号
-                    count: res.data, //数据总数，从服务端得到
-                    limit:5,
-                    theme: "#01AAED",
-                    jump:function(obj,first){
-                        that.jumpPage(obj)
-                    }
-                });
-            });
+        // 分页懒加载
+        layui.use("flow",function(){
+            that.flow = layui.flow;
+            that.flow.load({
+                elem:"#more",
+                done:function(page,next){
+                    var lis = that.list;
+                    obj.getIndexList(page).then((res)=>{
+                        that.$store.commit("updateIsLoding",false);
+                        setTimeout(function(){
+                            res.data.data.forEach(function(e){
+                                lis.push(e);
+                            })
+                            next("", page<res.data.last_page); //假设总页数为 10
+
+                        },400)
+                    });
+                }
+            })
         })
-        // obj.getIndexList(1).then((res)=>{
-        //     // console.log(res.data);
-        //     this.list = res.data;
-        //     console.log(this.list);
-        // })
+      
     },
     methods:{
-        jumpPage:function(pages){
-            obj.getIndexList(pages.curr).then((res)=>{
-                this.list = res.data;
-            })
-        }
+
+ 
     }
 
 }

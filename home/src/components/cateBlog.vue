@@ -26,59 +26,57 @@
                 </fieldset>
             </article>
         </div>
-        <div id="pagination"></div>
+        <div id="more"></div>
     </div>
 </template>
 <script>
 
 import listHeader from "@/components/list-header"
+
 import obj from '@/axios/api.js'
 export default {
     components:{
-        listHeader
+        listHeader,
     },
     data:function(){
         return {
             list:[],
-
         }
     },
     mounted:function(){
         
         this.jumpPage();
+
+      
     },
     methods:{
         jumpPage:function(){
-            //将vue组件对象保存到变量里
-            var that = this;
-            this.$store.commit("updateNavActive","category")
-            this.$store.commit("updateCateActive",this.$route.params.id)
-            obj.getCateBlog(this.$route.params.id,1).then((res)=>{
-                
-                layui.use('laypage', function(){
-                    that.laypage = layui.laypage; 
-                    that.laypage.render({
-                        elem: 'pagination', //注意，这里的 test1 是 ID，不用加 # 号
-                        count: res.data.count, //数据总数，从服务端得到
-                        theme: "#01AAED",
-                        limit:5,
-                        jump:function(pageObj,first){
-                            //判断是否第一次
-                            if(first)
-                            {
-                                that.list = res.data.blog;
-                            }else{
-                                //获取当前页数的文章
-                                obj.getCateBlog(that.$route.params.id,pageObj.curr).then((res)=>{
-                                    that.list = res.data.blog;
-                                })
-                            }
-                            
-                        }
-                    });
-                });
+                this.$store.commit("updateNavActive","category")
+                this.$store.commit("updateCateActive",this.$route.params.id)
+                this.$store.commit("updateIsLoding",true);
 
-            })
+                var that = this;
+                // 分页懒加载
+                layui.use("flow",function(){
+                    that.flow = layui.flow;
+                    that.flow.load({
+                        elem:"#more",
+                        done:function(page,next){
+                            var lis = that.list;
+                            obj.getCateBlog(that.$route.params.id,page).then((res)=>{
+                                that.$store.commit("updateIsLoding",false);
+
+                                setTimeout(function(){
+                                    res.data.data.forEach(function(e){
+                                        lis.push(e);
+                                    })
+                                    next("", page<res.data.last_page); //假设总页数为 10
+
+                                },400)
+                            });
+                        }
+                    })
+                })
 
         },
  
@@ -86,6 +84,7 @@ export default {
     watch: {
         // 如果路由有变化，会再次执行该方法
         $route(){
+            this.list=[];
             this.jumpPage();
         }
     },
@@ -104,9 +103,9 @@ export default {
     margin-top:30px;
 }
 .list_cover {
-    min-width: 95%;
-    max-width: 100%;
-    border:1px solid #a58d8d;
+    width: 100%;
+    max-height: 230px;
+    border: 1px solid #a58d8d;
     border-radius: 2px;
 }
 .sketch{

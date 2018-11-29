@@ -1,9 +1,9 @@
 import axios from "axios"
 
 
-// axios.defaults.baseURL = 'http://localhost:8080/v1/'
+axios.defaults.baseURL = 'http://localhost:8000/api/v1'
 axios.defaults.timeout = 5000;
-axios.defaults.baseURL = "http://api.52qy.top/api/v1";
+// axios.defaults.baseURL = "http://api.52qy.top/api/v1";
 axios.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
     //添加头信息
@@ -29,7 +29,7 @@ export default{
             page=1;
         }
         // return axios.get("/index/list/"+page)
-        return axios.get("/blog/"+page);
+        return axios.get("/blog?page="+page);
 
     },
     //获取所有文章数量
@@ -45,7 +45,7 @@ export default{
         if(page=="" || page<=0){
             page=1;
         }
-        return axios.get("/category/blog/"+cat_id+"/"+page)
+        return axios.get("/category/blog/"+cat_id+"?page="+page)
     },
     //获取该分类下文章数量
     // getCateBlogCount:(cat_id) =>{

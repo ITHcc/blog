@@ -1,5 +1,5 @@
 <template>
-    <div class="layui-row layui-col-space15">
+    <div class="layui-row layui-col-space30">
         <div class="layui-col-xs4 layui-col-msm4 layui-col-md4 layui-col-lg4" v-for="v in top">
             <a :href="v.url">
                 <img :src="v.cover" :alt="v.title" class="top-image">
@@ -28,6 +28,7 @@ export default {
 </script>
 <style>
 .top-image {
+    width:100%;
     max-height: 165px;
 }
 </style>

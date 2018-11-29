@@ -19,18 +19,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
 
-    Route::get("/blog/{page}",function(Request $req,$page){
+    //首页
+    Route::get("/blog",function(Request $req){
         // return \App\Blog::where("is_top",1)->get();
         $pageSize = 5;
-        $start = ($page-1) * $pageSize;
 
-        $data =  \App\Blog::where("is_show",1)->orderBy("is_top","desc")->orderBy("score","desc")->offset($start)->limit($pageSize)->get();
+        // $data =  \App\Blog::where("is_show",1)->orderBy("is_top","desc")->orderBy("score","desc")->offset($start)->limit($pageSize)->get();
+        $data =  \App\Blog::where("is_show",1)->orderBy("is_top","desc")->orderBy("score","desc")->paginate($pageSize);
+        
         foreach($data as $v){
             if(!$v['cover']) continue;
             $v['cover'] = Functions::getImageUrl($v['cover']);
         }
         return $data;
-    })->where('page', '\d+');
+    });
 
 
     Route::get("/blog/count",function(){
@@ -38,13 +40,13 @@ Route::prefix('v1')->group(function () {
         return \App\Blog::where("is_show",1)->count();
     });
 
-
+    //内容
     Route::get("/blog/content/{id}",function($id){
 
         return \App\Blog::where("is_show",1)->find($id);
     })->where("id","\d+");
     
-
+    //推荐
     Route::get("/recommend",function(){
 
         $data = \App\Recommend::where("is_show",1)->get();
@@ -66,25 +68,23 @@ Route::prefix('v1')->group(function () {
     });
 
     //获取指定分类下文章
-    Route::get("/category/blog/{id}/{page}",function($id,$page){
-        $pageSize = 5;
-        $start = ($page-1) * $pageSize;
-        $blog = \App\Blog::where("category_id",$id)->where("is_show",1)->offset($start)->limit($pageSize)->get();
-        $count = \App\Blog::where("category_id",$id)->where("is_show",1)->count();
+    Route::get("/category/blog/{id}",function($id){
+
+        $pageSize = 1;
+        $blog = \App\Blog::where("category_id",$id)->where("is_show",1)->paginate($pageSize);
+
         foreach($blog as $v){
             if(!$v['cover']) continue;
             $v['cover'] = Functions::getImageUrl($v['cover']);
         }
-        return [
-            "blog"=>$blog,
-            "count"=>$count
-        ];
+        return $blog;
+        
     });
 
 
     //归档
     Route::get("/archives",function(){
-        // select *,date_format(created_at, '%Y-%m')   from blog group by date_format(created_at, '%Y-%m');
+
         $date = \DB::select("select date_format(created_at, '%Y-%m') date  from blogs group by date_format(created_at, '%Y-%m')");
 
         $data = [];
