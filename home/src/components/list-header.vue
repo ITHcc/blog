@@ -28,7 +28,6 @@ export default {
 </script>
 <style>
 .top-image {
-    width:100%;
-    height:100%;
+    max-height: 165px;
 }
 </style>

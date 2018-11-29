@@ -1,13 +1,26 @@
 <template>
-    <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 layui-col-lg10">
-        <div class="layui-card" v-for="v in notice" style="borderRadius: 4px;">
-            <div class="layui-card-header" v-show="v.title" v-html="v.title"></div>
-            <div class="layui-card-body">
-                <!-- <img v-show="v.cover" :src="v.cover" :alt="v.title" style="width:100%;" > -->
-                <div v-show="v.content" v-html="v.content"></div>
+    <div class="notice">
+
+        <div class="layui-hide-xs layui-hide-sm layui-hide-md layui-show-lg-block	 layui-col-lg10 layui-col-lg-offset1" :style="{'borderRadius': '4px'}">
+            <div v-for="(v,k) in notice" class="layui-card">
+                <div class="layui-card-header" v-show="v.title" v-html="v.title"></div>
+                <div class="layui-card-body">
+                    <!-- <img v-show="v.cover" :src="v.cover" :alt="v.title" style="width:100%;" > -->
+                    <div v-show="v.content" v-html="v.content"></div>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex;justify-content: space-between;align-items: self-end;">
+            <div class="layui-card layui-col-xs5 layui-col-sm5 layui-col-md5 layui-hide-lg" v-for="(v,k) in notice" :style="{'borderRadius': '4px'}">
+                <div class="layui-card-header" v-show="v.title" v-html="v.title"></div>
+                <div class="layui-card-body">
+                    <!-- <img v-show="v.cover" :src="v.cover" :alt="v.title" style="width:100%;" > -->
+                    <div v-show="v.content" v-html="v.content"></div>
+                </div>
             </div>
         </div>
     </div>
+    
 </template>
 <style>
     

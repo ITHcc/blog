@@ -13,25 +13,28 @@
       <banner @resize="resize"></banner>
       <!-- ,backgroundColor:'#f7f7f7' -->
       <div  class="layui-fluid box" ref="box" :style="{marginTop:bannerMargin,paddingTop:'20px',minHeight:'700px'}">
-        <div class="layui-row ">
-            <div class="layui-col-xs7 layui-col-sm7 layui-col-md7 layui-col-lg7 layui-col-xs-offset2 layui-col-xs-offset2 layui-col-sm-offset2 layui-col-md-offset2 layui-col-lg-offset2">
+        <div class="layui-row layui-col-space30">
+            <div class="layui-col-xs12 layui-col-sm12 layui-col-md11 layui-col-lg7 layui-col-lg-offset1">
                
-                  <div class="layui-row">
-                    <div class="layui-col-xs11 layui-col-sm11 layui-col-md11 layui-col-lg11 container-box">
-                        <router-view name="main"/> 
+               <div class="layui-row">
+                  <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg10 layui-col-lg-offset2 container-box">
+                      <!-- 通知:超小屏幕,小屏幕,大屏幕显示  -->
+        
+                      <router-view name="main"/> 
+                                                              
+                      <footer  v-show="$store.state.navActive!='index'" class="footer">
+                        <p class="reprint">转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © Hcc</p>
+                        Copyright © 2018&nbsp;-&nbsp; Hcc&nbsp;&nbsp;鄂ICP备17027437号
                         
-                        <footer  v-show="$store.state.navActive!='index'" class="footer">
-                          <p class="reprint">转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © Hcc</p>
-                          Copyright © 2018&nbsp;-&nbsp; Hcc&nbsp;&nbsp;鄂ICP备17027437号
-                          
-                            &nbsp;-&nbsp;<a href="/">52qy.top</a>
-  
-                        </footer>
+                          &nbsp;-&nbsp;<a href="/">52qy.top</a>
 
-                    </div>
-                </div>
+                      </footer>
+                  </div>
+
+              </div>
             </div>
-            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3 layui-col-lg3">
+            <!-- 通知:超大屏显示 -->
+            <div class="layui-col-lg3  layui-hide-xs layui-hide-sm layui-hide-md layui-show-lg-block">
               <router-view name="right"/>
             </div>
         </div>

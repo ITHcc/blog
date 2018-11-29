@@ -8,6 +8,10 @@
                 <p style="color:#98a6ad;">世上最好的保鲜就是不断进步，成为一个更好更值得被爱的人。</p>
             </div>
         </div>
+        <!-- 通知栏:中小屏显示的样式 -->
+        <div class="layui-hide-lg">
+            <right></right>
+        </div>
 
         <list-header></list-header>
         <div>
@@ -33,10 +37,12 @@
 </template>
 <script>
 import listHeader from "@/components/list-header"
+import right from "@/components/right"
 import obj from '@/axios/api.js'
 export default {
     components:{
-        listHeader
+        listHeader,
+        right
     },
     data:function(){
         return {

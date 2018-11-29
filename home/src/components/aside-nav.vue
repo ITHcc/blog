@@ -1,6 +1,6 @@
 <template>
     <!-- 侧边栏导航 -->
-    <div  class="aside-box layui-col-xs2 layui-col-sm2 layui-col-md2 layui-col-lg2" id="aside">
+    <div  class="aside-box layui-col-xs6 layui-col-sm4 layui-col-md3 layui-col-lg2" id="aside">
       <div class="">
         <div class="user">
             <img src="http://parui8x60.bkt.clouddn.com/touxiang1.jpg" alt="" width="120" height="120">
