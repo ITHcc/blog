@@ -47,6 +47,6 @@ export default {
   background-image: url("/static/images/192642-15327772028c2b.jpg");
   background-position: center center;
   background-size: cover;
-  z-index: 1;
+  z-index: 5;
 }
 </style>
