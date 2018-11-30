@@ -10,8 +10,16 @@ $contents = file_get_contents("php://input");
 $data = json_decode($contents);
 
 //获取请求通中的sha1签名
-$signature = $_SERVER;
-file_put_contents("log",json_encode($signature));
+$signature = $_SERVER['HTTP_X_HUB_SIGNATURE'];
 
-die;
-list($algo,$hash) = explode("=",$data);
+list($algo,$hash) = explode("=",$signature);
+
+$hash = hash_hmac($algo,$contents,$key);
+
+if($hash==$signature){
+    
+    exec("git pull");
+
+}else{
+    echo "签名错误";
+}
