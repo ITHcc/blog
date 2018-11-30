@@ -10,6 +10,4 @@
 
 
 	//验证仓库密码是否正确
-	if($data['password']==$token){
-	    exec("git pull");
-	}
+	 exec("git pull");
