@@ -11,7 +11,7 @@ $data = json_decode($contents);
 
 //获取请求通中的sha1签名
 $signature = $_SERVER['HTTP_X_HUB_SIGNATURE'];
-
+echo $signature;
 list($algo,$hash) = explode("=",$signature);
 
 $hash = hash_hmac($algo,$contents,$key);
