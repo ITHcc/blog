@@ -13,10 +13,8 @@ $data = json_decode($contents);
 $signature = $_SERVER['HTTP_X_HUB_SIGNATURE'];
 list($algo,$hash) = explode("=",$signature);
 
-echo $signature==hash_hmac($algo,$contents,$key);
-die;
-if($hash==$signature){
-    
+$newHash = hash_hmac($algo,$contents,$key);
+if($hash==$newHash){
     exec("git pull");
 
 }else{
