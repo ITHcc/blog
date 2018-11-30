@@ -18,5 +18,5 @@ $data = json_decode($contents);
 //获取请求通中的sha1签名
 $signature = $_SERVER;
 echo json_encode($signature);
-die;
+die(1);
 list($algo,$hash) = explode("=",$data);
