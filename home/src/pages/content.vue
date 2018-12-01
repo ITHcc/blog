@@ -229,18 +229,18 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 }
 
-h1 {
+ .content-box h1 {
     color: #000000;
     font-size: 28px;
 }
 
-h2 {
+ .content-box h2 {
     border-bottom: 2px solid #CCCCCC;
     color: #000000;
     font-size: 24px;
 }
 
-h3 {
+ .content-box h3 {
     border-bottom: 2px solid #CCCCCC;
     font-size: 18px;
 }
@@ -270,7 +270,7 @@ hr {
     margin: 15px 0;
 }
 
-p{
+ .content-box p{
     margin:1em 0;
 }
 .content>p{
