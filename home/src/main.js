@@ -7,7 +7,7 @@ import vuexStore from './store'
 import axios from 'axios'
 
 import hljs from 'highlight.js'
-import 'highlight.js/styles/Agate.css' //样式文件
+import 'highlight.js/styles/agate.css' //样式文件
 Vue.directive('highlight',function (el) {
   let blocks = el.querySelectorAll('pre code');
   blocks.forEach((block)=>{
