@@ -9,7 +9,7 @@
         </div>
         
         <list-header></list-header>
-        <div>
+        <div id="post">
             <article class="post" v-for="v in list">
                 <fieldset class="layui-elem-field layui-field-title" style="marginBottom:10px;">
                     <legend><router-link :to="'/content/'+v.id" :title="v.title">{{v.title}}</router-link></legend>
@@ -106,7 +106,6 @@ export default {
 .list_cover {
     width: 100%;
     max-height: 230px;
-    border: 1px solid #a58d8d;
     border-radius: 2px;
 }
 .sketch{
@@ -124,5 +123,20 @@ export default {
 }
 .more a{
     color: #01AAED;
+}
+#post legend {
+    font-size:26px;
+    font-weight:500;
+}
+#post img{
+    cursor: pointer;
+    transition: all 0.6s;
+}
+#post img:hover{
+    transform: scale(1.02);
+    box-shadow: 0 22px 43px rgba(0,0,0,0.15);
+}
+#post a:hover{
+    color: #00bcd4;
 }
 </style>
