@@ -122,6 +122,10 @@ Route::prefix('v1')->group(function () {
         ])
         ->find($id);
         
+        foreach($info['blog'] as $v){
+            if(!$v['cover']) continue;
+            $v['cover'] = Functions::getImageUrl($v['cover']);
+        }
         return $info->blog;
     });
 
