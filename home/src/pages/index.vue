@@ -128,7 +128,7 @@ body {
 .container-box {
     border-radius: 5px;
     background-color:#fff;
-    padding:60px 60px 0px;
+    padding:60px 20px 0px;
     min-height:700px;
     overflow: hidden;
     /* position:absolute; */

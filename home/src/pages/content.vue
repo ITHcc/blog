@@ -329,10 +329,10 @@ blockquote{
 
 ul, ol { margin: 1em 0; padding: 0 0 0 2em; }
 li p:last-child { margin:0 }
-ul li {
+.content-box ul li {
   list-style:disc;
 }
-ol li {
+.content-boxol li {
 list-style: unset;
 }
 dd { margin: 0 0 0 2em; }
