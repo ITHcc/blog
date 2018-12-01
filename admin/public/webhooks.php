@@ -19,7 +19,7 @@ $newHash = hash_hmac($algo,$contents,$key);
 //验证自己生产的sha1与Github发给我们的sha1是否一致
 if($hash==$newHash){
     //执行git pull
-    exec("git pull");
+    echo exec("git pull");
 
 }else{
     echo "签名错误";
