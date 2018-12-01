@@ -219,7 +219,6 @@ body{
     color:#444;
     font-size:13px;
     line-height:1.5em;
-    padding:1em;
     margin:auto;
 }
 .content-box {
