@@ -55,16 +55,5 @@ export default {
   }
 }
 </script>
-<style>
-a {
-  /* color:#01AAED; */
-}
-/* body {
-  background-color: transparent;
-} */
-body {
-  
 
-}
-</style>
 

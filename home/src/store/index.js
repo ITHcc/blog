@@ -8,7 +8,7 @@ const store = new Vuex.Store({
         asideStatus:false,
         navActive:"index",
         cateActive:"",
-        isLoding:true,
+        isLoding:false,
     },
     mutations:{
         updateAside(state,value){

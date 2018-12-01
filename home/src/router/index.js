@@ -4,13 +4,15 @@ import Router from 'vue-router'
 import index from "@/pages/index"
   import list from "@/components/list"
   import right from "@/components/right"
-  import content from "@/components/content"
+  // import content from "@/components/content"
   import archives from "@/components/archives"
   import tags from "@/components/tags"
   import about from "@/components/about"
   import friends from "@/components/friends"
   import cateblog from "@/components/cateBlog"
   import tagblog from "@/components/tagBlog"
+import content from "@/pages/content"
+
 
 Vue.use(Router)
 
@@ -57,13 +59,6 @@ export default new Router({
           }
         },
         {
-          path:"/content/:id",
-          components:{
-            main:content,
-            right:right
-          }
-        },
-        {
           path:"/cateblog/:id",
           components:{
             main:cateblog,
@@ -78,6 +73,10 @@ export default new Router({
           }
         }
       ]
-    }
+    },
+    {
+      path:"/content/:id",
+      component:content
+    },
   ]
 })

@@ -29,8 +29,6 @@ class UploadController extends Controller
         
         $flag = OSS::publicUpload("hcc-blog",$path,$_FILES[$filename]['tmp_name'],["ContentType"=>"image/jpeg"]);
         if($flag){
-            //将地址保存到redis中,6小时后过期
-            Redis::setex("tmp-".$path, 3600*6, 'predis');
             //获取图片地址
             $ossPath = Functions::getPublicImageUrl($path);
             return json_encode([

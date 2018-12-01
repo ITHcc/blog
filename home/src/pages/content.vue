@@ -22,9 +22,16 @@
                <div class="layui-row">
                   <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg10 layui-col-lg-offset2 container-box">
                       <!-- 通知:超小屏幕,小屏幕,大屏幕显示  -->
-        
-                      <router-view name="main"/> 
-                                                              
+
+                       <div class="content-box markdown-body">
+                            <fieldset class="layui-elem-field">
+                                <legend style="" class="title" >{{data.title}}</legend>
+                            
+                                <p v-html="data.preface"></p>
+                                <hr class="layui-bg-green">
+                                <div class="layui-field-box content" v-html="data.content" v-highlight></div>
+                            </fieldset>
+                       </div>                            
                       <footer  v-show="$store.state.navActive!='index'" class="footer">
                         <p class="reprint">转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © Hcc</p>
                         Copyright © 2018&nbsp;-&nbsp; Hcc&nbsp;&nbsp;鄂ICP备17027437号
@@ -38,7 +45,7 @@
             </div>
             <!-- 通知:超大屏显示 -->
             <div class="layui-col-lg3  layui-hide-xs layui-hide-sm layui-hide-md layui-show-lg-block">
-              <router-view name="right"/>
+                <right></right>
             </div>
         </div>
       </div> 
@@ -54,17 +61,23 @@
 import asideNav from "@/components/aside-nav"
 import banner from "@/components/banner"
 import loding from "@/components/loding"
+import right from "@/components/right"
+
+import obj from "@/axios/api"
+
 
 
 export default {
-  name: 'index',
+  name: 'test',
   components:{
     asideNav,
     banner,
+    right,
     loding,
   },
   data(){
     return {
+      data:[],
       layer:"",
       banner:"",
       bannerMargin:"1px",
@@ -74,6 +87,13 @@ export default {
   mounted:function(){
 
     var that = this;
+    this.$store.commit('updateNavActive',"category");
+         
+    obj.getContent(this.$route.params.id).then((res)=>{
+    //  console.log(res);
+        this.data = res.data;
+        this.$store.commit("updateCateActive",this.data.cate_id)
+    })
     layui.use("layer",function(){      
       that.layer = layui.layer;
     })
@@ -118,12 +138,6 @@ export default {
 <style>
 body {
   background-color: #eee;
-}
-.box {
-  /* background-color: #f7f7f7; */
-  /* background-color:#eee; */
-  /* background-image:url("/static/images/192642-15327772028c2d.jpg"); */
-  /* background-size:100% 800px; */
 }
 .container-box {
     border-radius: 5px;
@@ -180,4 +194,164 @@ header {
   background: rgba(0,0,0,.2);
   z-index:5;
 }
+
+
+.content-box .title {
+    color:#666;
+    font-size:25px;
+    font-weight:bold;
+ }
+ .content-box.content {
+    font-size:16px;
+    margin-top:20px;
+ }
+.content-box .layui-elem-field legend {
+  font-size: 28px;
+    font-weight: bold;
+    color:#333;
+}
+
+
+/*markdown样式*/
+html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+
+body{
+    color:#444;
+    font-size:13px;
+    line-height:1.5em;
+    padding:1em;
+    margin:auto;
+}
+.content-box {
+    font-family: -apple-system,BlinkMacSystemFont,"Lucida Grande","Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei","Noto Sans CJK SC","Source Han Sans CN",SimSun,sans-serif;
+
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+h1 {
+    color: #000000;
+    font-size: 28px;
+}
+
+h2 {
+    border-bottom: 2px solid #CCCCCC;
+    color: #000000;
+    font-size: 24px;
+}
+
+h3 {
+    border-bottom: 2px solid #CCCCCC;
+    font-size: 18px;
+}
+
+h4 {
+    font-size: 16px;
+}
+
+h5 {
+    font-size: 14px;
+}
+
+h6 {
+    color: #777777;
+    background-color: inherit;
+    font-size: 14px;
+}
+
+hr {
+    height: 0.2em;
+    border: 0;
+    color: #CCCCCC;
+    background-color: #CCCCCC;
+}
+
+.content-box p,.content-box  blockquote,.content-box  ul,.content-box  ol,.content-box  dl,.content-box  li,.content-box  table,.content-box  pre {
+    margin: 15px 0;
+}
+
+p{
+    margin:1em 0;
+}
+.content>p{
+  padding-left:15px;
+}
+pre { 
+    background-color: #F8F8F8;    
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    overflow: auto;
+    padding: 5px;
+    margin-left:15px;
+}
+
+pre code {
+    background-color: #F8F8F8;
+    border: none;    
+    padding: 0;
+}
+
+code {
+    font-family: Consolas, Monaco, Andale Mono, monospace;
+    background-color:#F8F8F8;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    padding: 0 0.2em;
+    line-height: 1;
+}
+
+pre > code {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+
+.content-box a{ color: #0645ad; text-decoration:none;}
+.content-box a:visited{ color: #0b0080; }
+.content-box a:hover{ color: #06e; }
+.content-box a:active{ color:#faa700; }
+.content-box a:focus{ outline: thin dotted; }
+.content-box a:hover,.content-box  a:active{ outline: 0; }
+
+::-moz-selection{background:rgba(255,255,0,0.3);color:#000}
+::selection{background:rgba(255,255,0,0.3);color:#000}
+
+.content-box a::-moz-selection{background:rgba(255,255,0,0.3);color:#0645ad}
+.content-box a::selection{background:rgba(255,255,0,0.3);color:#0645ad}
+
+blockquote{
+    color:#666666;
+    margin:0;
+    padding-left: 3em;
+    border-left: 0.5em #EEE solid;
+}
+
+ul, ol { margin: 1em 0; padding: 0 0 0 2em; }
+li p:last-child { margin:0 }
+ul li {
+  list-style:disc;
+}
+ol li {
+list-style: unset;
+}
+dd { margin: 0 0 0 2em; }
+
+img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; max-width:100%;}
+
+table { border-collapse: collapse; border-spacing: 0; }
+td { vertical-align: top; }
+
+@media only screen and (min-width: 480px) {
+    body{font-size:14px;}
+}
+
+@media only screen and (min-width: 768px) {
+    body{font-size:16px;}
+} 
+img {
+   max-width: 100%; }
+
+
 </style>

@@ -13,8 +13,12 @@ $data = json_decode($contents);
 $signature = $_SERVER['HTTP_X_HUB_SIGNATURE'];
 list($algo,$hash) = explode("=",$signature);
 
+
 $newHash = hash_hmac($algo,$contents,$key);
+
+//验证自己生产的sha1与Github发给我们的sha1是否一致
 if($hash==$newHash){
+    //执行git pull
     exec("git pull");
 
 }else{
