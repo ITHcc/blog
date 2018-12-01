@@ -120,4 +120,18 @@ export default {
 .more a{
     color: #01AAED;
 }
+#post legend {
+    font-size:26px;
+    font-weight:500;
+}
+#post img{
+    cursor: pointer;
+    transition: all 0.6s;
+}
+#post img:hover{
+    transform: scale(1.02);
+}
+#post a:hover{
+    color: #00bcd4;
+}
 </style>
