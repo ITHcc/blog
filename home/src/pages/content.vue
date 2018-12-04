@@ -228,7 +228,7 @@ body{
 h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 }
-.content-boxh1,.content-box h2,.content-box h3,.content-box h4,.content-box h5,.content-box h6{
+.content-box h1,.content-box h2,.content-box h3,.content-box h4,.content-box h5,.content-box h6{
   margin-top:15px;
 }
  .content-box h1 {
