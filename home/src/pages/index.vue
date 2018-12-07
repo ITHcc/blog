@@ -43,15 +43,10 @@
         </div>
       </div> 
       
-      <asideNav v-show="asideStatus" class="layui-anim layui-anim-fadein" ref="asideNav"></asideNav>
-
-      <div :class="[{'zhegai':$store.state.asideStatus}]" ></div>
-      
   </div>
 </template>
 
 <script>
-import asideNav from "@/components/aside-nav"
 import banner from "@/components/banner"
 import loding from "@/components/loding"
 
@@ -59,7 +54,6 @@ import loding from "@/components/loding"
 export default {
   name: 'index',
   components:{
-    asideNav,
     banner,
     loding,
   },
@@ -104,11 +98,6 @@ export default {
       
       this.bannerMargin = value;
     },
-  },
-  computed:{
-    asideStatus(){
-      return this.$store.state.asideStatus;
-    }
   }
   
  
@@ -119,12 +108,7 @@ export default {
 body {
   background-color: #eee;
 }
-.box {
-  /* background-color: #f7f7f7; */
-  /* background-color:#eee; */
-  /* background-image:url("/static/images/192642-15327772028c2d.jpg"); */
-  /* background-size:100% 800px; */
-}
+
 .container-box {
     border-radius: 5px;
     background-color:#fff;
@@ -170,14 +154,5 @@ header {
   line-height: 22px;
   text-align: center;
 }
-/* 遮盖 */
-.zhegai {
-  width: 100%;
-  height:100%;
-  position: fixed;
-  top:0px;
-  left:0px;
-  background: rgba(0,0,0,.2);
-  z-index:5;
-}
+
 </style>

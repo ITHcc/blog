@@ -46,7 +46,8 @@ export default {
     mounted:function(){
         
         this.jumpPage();
-
+        
+        // document.title = this.list[0].category.tag_name;
       
     },
     methods:{
@@ -64,7 +65,10 @@ export default {
                         done:function(page,next){
                             var lis = that.list;
                             obj.getCateBlog(that.$route.params.id,page).then((res)=>{
-
+                                
+                                if(res.data.data.length){
+                                    document.title = res.data.data[0].category.cate_name+" -Hcc个人博客";
+                                }
                                 setTimeout(function(){
                                     that.$store.commit("updateIsLoding",false);
 

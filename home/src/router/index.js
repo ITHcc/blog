@@ -35,6 +35,9 @@ export default new Router({
           components:{
             main:archives,
             right:right
+          },
+          meta:{
+            title:"归档"
           }
         },
         {
@@ -42,6 +45,9 @@ export default new Router({
           components:{
             main:tags,
             right:right,
+          },
+          meta:{
+            title:"标签"
           }
         },
         {
@@ -49,6 +55,9 @@ export default new Router({
           components:{
             main:about,
             right:right,
+          },
+          meta:{
+            title:"关于"
           }
         },
         {
@@ -56,6 +65,9 @@ export default new Router({
           components:{
             main:friends,
             right:right
+          },
+          meta:{
+            title:"友链"
           }
         },
         {
@@ -76,7 +88,7 @@ export default new Router({
     },
     {
       path:"/content/:id",
-      component:content
+      component:content,
     },
   ]
 })

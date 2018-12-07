@@ -12,10 +12,10 @@
         <div>
             <article class="post" v-for="v in list">
                 <fieldset class="layui-elem-field layui-field-title" style="marginBottom:10px;">
-                    <legend><router-link :to="'/content/'+v.id" :title="v.title">{{v.title}}</router-link></legend>
+                    <legend><router-link :to="'/content/'+v.pivot.blog_id" :title="v.title">{{v.title}}</router-link></legend>
                     <div class="layui-field-box">
                         <div class="entry-content">
-                            <p style="padding:15px;"><router-link :to="'/content/'+v.id"><img v-show="v.cover" :src="v.cover" :alt="v.cover_desc" class="list_cover"></router-link></p>
+                            <p style="padding:15px;"><router-link :to="'/content/'+v.pivot.blog_id"><img v-show="v.cover" :src="v.cover" :alt="v.cover_desc" class="list_cover"></router-link></p>
                             <!-- <p class="sketch">由于前端技术的蓬勃发展和你自身的不断努力，很多小伙伴已经打通了任督二脉，做到了前后端通吃。你们就是自己程序世界里的神，在这里你们无所不能，创造世界，制定规则和逻辑。当一个属于你的世界做好后，你需要展示给朋友，发布于众人，让爱你的人欣赏。这时候我们需要一个强有力的服务器作为容器，而Nginx可以满足你的一切幻想。</p> -->
                             <blockquote class="layui-elem-quote sketch" v-html="v.preface"></blockquote>
                             <p class="more">
@@ -47,6 +47,7 @@ export default {
         //获取当前页数的文章
         obj.getTagblog(this.$route.params.id).then((res)=>{
             this.list = res.data;
+            document.title = res.data[0].tag_name+" -Hcc个人博客";
         })
     },
 

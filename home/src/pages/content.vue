@@ -49,16 +49,11 @@
             </div>
         </div>
       </div> 
-      
-      <asideNav v-show="asideStatus" class="layui-anim layui-anim-fadein" ref="asideNav"></asideNav>
 
-      <div :class="[{'zhegai':$store.state.asideStatus}]" ></div>
-      
   </div>
 </template>
 
 <script>
-import asideNav from "@/components/aside-nav"
 import banner from "@/components/banner"
 import loding from "@/components/loding"
 import right from "@/components/right"
@@ -70,13 +65,13 @@ import obj from "@/axios/api"
 export default {
   name: 'test',
   components:{
-    asideNav,
     banner,
     right,
     loding,
   },
   data(){
     return {
+      num: null,
       data:[],
       layer:"",
       banner:"",
@@ -85,18 +80,21 @@ export default {
     }
   },
   mounted:function(){
+      var that = this;
+      this.$store.commit('updateNavActive',"category");
+      
+      //获取文章内容
+      obj.getContent(this.$route.params.id).then((res)=>{
+          this.data = res.data;
+          document.title = res.data.title+" -Hcc个人博客";
+          this.$store.commit("updateCateActive",this.data.category_id)
 
-    var that = this;
-    this.$store.commit('updateNavActive',"category");
-         
-    obj.getContent(this.$route.params.id).then((res)=>{
-    //  console.log(res);
-        this.data = res.data;
-        this.$store.commit("updateCateActive",this.data.cate_id)
-    })
-    layui.use("layer",function(){      
-      that.layer = layui.layer;
-    })
+          
+      })
+
+      layui.use("layer",function(){      
+        that.layer = layui.layer;
+      })
   },
   methods:{
     search:function(){
@@ -124,13 +122,7 @@ export default {
       
       this.bannerMargin = value;
     },
-  },
-  computed:{
-    asideStatus(){
-      return this.$store.state.asideStatus;
-    }
   }
-  
  
 }
 </script>
@@ -334,10 +326,10 @@ li p:last-child { margin:0 }
 .content-box ul li {
   list-style:disc;
 }
-.content-boxol li {
+.content-box ol li {
 list-style: unset;
 }
-dd { margin: 0 0 0 2em; }
+.content-box dd { margin: 0 0 0 2em; }
 
 img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; max-width:100%;}
 

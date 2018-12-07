@@ -71,8 +71,7 @@ Route::prefix('v1')->group(function () {
     Route::get("/category/blog/{id}",function($id){
 
         $pageSize = 1;
-        $blog = \App\Blog::where("category_id",$id)->where("is_show",1)->paginate($pageSize);
-
+        $blog = \App\Blog::where("category_id",$id)->with("category")->where("is_show",1)->paginate($pageSize);
         foreach($blog as $v){
             if(!$v['cover']) continue;
             $v['cover'] = Functions::getImageUrl($v['cover']);
@@ -121,10 +120,10 @@ Route::prefix('v1')->group(function () {
             },
         ])
         ->find($id);
-        
-        foreach($info['blog'] as $v){
+        foreach($info->blog as $v){
             if(!$v['cover']) continue;
             $v['cover'] = Functions::getImageUrl($v['cover']);
+            $v['tag_name'] = $info->tag_name;
         }
         return $info->blog;
     });
