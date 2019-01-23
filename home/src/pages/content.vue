@@ -63,11 +63,26 @@ import obj from "@/axios/api"
 
 
 export default {
-  name: 'test',
+  name: 'async',
   components:{
     banner,
     right,
     loding,
+  },
+  metaInfo() {
+      return {
+        title: this.title+" - Hcc的个人博客", // set a title
+        meta: [
+            {                 // set meta
+                name: 'keywords',
+                content: "PHP,Laravel,VUE,jQuery,CSS,HTML,MYSQL,redis,LNMP,Bootstrap,AmazeUI前端,Hcc的个人博客"
+            },
+            {
+                name: 'description',
+                content: this.description
+            }
+        ]
+      }
   },
   data(){
     return {
@@ -77,6 +92,8 @@ export default {
       banner:"",
       bannerMargin:"1px",
       clientHeight:document.documentElement.clientHeight,
+      description:"",
+      title:"",
     }
   },
   mounted:function(){
@@ -86,7 +103,9 @@ export default {
       //获取文章内容
       obj.getContent(this.$route.params.id).then((res)=>{
           this.data = res.data;
-          document.title = res.data.title+" -Hcc个人博客";
+          // document.title = res.data.title+" -Hcc个人博客";
+          this.title = res.data.title;
+          this.description = res.data.preface;
           this.$store.commit("updateCateActive",this.data.category_id)
 
           

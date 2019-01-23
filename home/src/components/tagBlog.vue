@@ -33,13 +33,29 @@
 import listHeader from "@/components/list-header"
 import obj from '@/axios/api.js'
 export default {
+    name:"async",
     components:{
         listHeader
+    },
+    metaInfo() {
+      return {
+        title: this.keywords+" - Hcc的个人博客", // set a title
+        meta: [
+            {                 // set meta
+                name: 'keywords',
+                content: "PHP,Laravel,VUE,jQuery,CSS,HTML,MYSQL,redis,LNMP,Bootstrap,AmazeUI前端,Hcc的个人博客"
+            },
+            {
+                name: 'description',
+                content: this.keywords
+            }
+        ]
+      }
     },
     data:function(){
         return {
             list:[],
-
+            keywords:"",
         }
     },
     mounted:function(){
@@ -47,7 +63,8 @@ export default {
         //获取当前页数的文章
         obj.getTagblog(this.$route.params.id).then((res)=>{
             this.list = res.data;
-            document.title = res.data[0].tag_name+" -Hcc个人博客";
+            // document.title = res.data[0].tag_name+" -Hcc个人博客";
+            this.keywords = res.data[0].tag_name+"-Hcc的个人博客";
         })
     },
 

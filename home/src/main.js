@@ -8,6 +8,11 @@ import axios from 'axios'
 
 import hljs from 'highlight.js'
 import 'highlight.js/styles/agate.css' //样式文件
+
+import MetaInfo from 'vue-meta-info'
+
+Vue.use(MetaInfo)
+
 Vue.directive('highlight',function (el) {
   let blocks = el.querySelectorAll('pre code');
   blocks.forEach((block)=>{
@@ -15,7 +20,6 @@ Vue.directive('highlight',function (el) {
   })
 
 })
-
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
@@ -23,21 +27,21 @@ Vue.config.productionTip = false
 require("./mock.js")
 
 /* eslint-disable no-new */
-router.beforeEach((to, from, next) => {
+// router.beforeEach((to, from, next) => {
     
-    if(from.name!="content" && to.name=="content"){
-      // router.go("/content/"+to.params.id);
-    }
-    if(from.meta.isfirst){
+//     if(from.name!="content" && to.name=="content"){
+//       // router.go("/content/"+to.params.id);
+//     }
+//     if(from.meta.isfirst){
 
-    }
-    if(to.meta.title){
-      document.title = to.meta.title+" -Hcc个人博客";
-    }else{
-      document.title = "Hcc个人博客";
-    }
-    next();
-})
+//     }
+//     if(to.meta.title){
+//       document.title = to.meta.title+" -Hcc个人博客";
+//     }else{
+//       document.title = "Hcc个人博客";
+//     }
+//     next();
+// })
 new Vue({
   el: '#app',
   store:vuexStore,

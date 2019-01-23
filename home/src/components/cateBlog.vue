@@ -35,12 +35,29 @@ import listHeader from "@/components/list-header"
 
 import obj from '@/axios/api.js'
 export default {
+    name:"async",
     components:{
         listHeader,
+    },
+    metaInfo() {
+      return {
+        title: this.keywords+" - Hcc的个人博客", // set a title
+        meta: [
+            {                 // set meta
+                name: 'keywords',
+                content: "PHP,Laravel,VUE,jQuery,CSS,HTML,MYSQL,redis,LNMP,Bootstrap,AmazeUI前端,Hcc的个人博客"
+            },
+            {
+                name: 'description',
+                content: this.keywords
+            }
+        ]
+      }
     },
     data:function(){
         return {
             list:[],
+            keywords:"",
         }
     },
     mounted:function(){
@@ -67,7 +84,9 @@ export default {
                             obj.getCateBlog(that.$route.params.id,page).then((res)=>{
                                 
                                 if(res.data.data.length){
-                                    document.title = res.data.data[0].category.cate_name+" -Hcc个人博客";
+                                    // document.title = res.data.data[0].category.cate_name+" -Hcc个人博客";
+                                    
+                                    that.keywords = res.data.data[0].category.cate_name+"-Hcc的个人博客";
                                 }
                                 setTimeout(function(){
                                     that.$store.commit("updateIsLoding",false);

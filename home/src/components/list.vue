@@ -44,6 +44,19 @@ export default {
         listHeader,
         right
     },
+    metaInfo: {
+      title: '首页'+" - Hcc的个人博客", // set a title
+      meta: [
+        {                 // set meta
+            name: 'keywords',
+            content: "PHP,Laravel,VUE,jQuery,CSS,HTML,MYSQL,redis,LNMP,Bootstrap,AmazeUI前端,Hcc的个人博客"
+        },
+        {
+            name: 'description',
+            content: "首页-Hcc的个人博客"
+        }
+      ]
+    },
     data:function(){
         return {
             laypage:"",

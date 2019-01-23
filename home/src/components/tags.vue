@@ -15,6 +15,19 @@
 import obj from "@/axios/api"
 
 export default {
+    metaInfo: {
+      title: '标签'+" - Hcc的个人博客", 
+      meta: [
+        {  
+            name: 'keywords',
+            content: "PHP,Laravel,VUE,jQuery,CSS,HTML,MYSQL,redis,LNMP,Bootstrap,AmazeUI前端,Hcc的个人博客"
+        },
+        {
+            name: 'description',
+            content: "标签-Hcc的个人博客"
+        }
+      ]
+    },
     data:function(){
         return {
             data:[],

@@ -7,7 +7,7 @@
     <div v-show="asideStatus"  class="aside-box layui-col-xs6 layui-col-sm4 layui-col-md3 layui-col-lg2" id="aside">
       <div class="">
         <div class="user">
-            <img src="http://parui8x60.bkt.clouddn.com/touxiang1.jpg" alt="" width="120" height="120">
+            <img src="/static/images/touxiang.jpeg" alt="" width="120" height="120">
             <p class="username">Hcc</p>
             <p class="signature">专注于技术分享。</p>
         </div>

@@ -11,6 +11,7 @@
 |
 */
 
+use Elasticsearch\ClientBuilder;
 
 //登录
 Route::get("/login","LoginController@login")->name("login");
@@ -65,12 +66,114 @@ Route::group(['middleware'=>"CheckAdmin"],function(){
 
 
 
+Route::get("/search",function(){
+    $client = ClientBuilder::create()->setHosts(["127.0.0.1:9200"])->build();
+    $params = [
+        'index' => 'blog',
+        'type' => '_doc',
+        'body' => [
+            'query' => [
+                'match' => [
+                    'title' => 'git'
+                ]
+            ]
+        ]
+    ];
+    $response = $client->search($params);
+    return $response;
+});
+
 
 Route::get("/test",function(){
+    $client = ClientBuilder::create()->setHosts(["127.0.0.1:9200"])->build();
 
-    return view("admin.test.create");
-    return \App\Services\OSS::getPrivateObjectURLWithExpireTime("hcc-blog","cover/15426815562714.jpg",new \DateTime('+1 day'));
+    $data = \App\Blog::with(["tags"=>function($query){
+        $query->select('tags.id','tag_name');
+    },"category"=>function($query){
+        $query->select('categorys.id',"cate_name");
+    }])->get();
 
+    foreach($data as $v){
+        $params = [
+            'index' => 'blog',
+            'type' => '_doc',
+            'id' => $v['id'],
+            'body' => $v
+        ];
+        $response = $client->index($params);
+    }
+
+    return $response;
+
+    $client = ClientBuilder::create()->setHosts(["127.0.0.1:9200"])->build();
+    $params = [
+        'index' => 'blog',
+        'body' => [
+           'mappings'=>[
+               '_doc'=>[
+                   'properties'=>[
+                       'title'=>[
+                           'type'=>'text',
+                           'analyzer'=>'ik_max_word',
+                       ],
+                       'preface'=>[
+                           'type'=>'text',
+                           'analyzer'=>'ik_max_word',
+                       ],
+                       'content'=>[
+                           'type'=>'text',
+                           'analyzer'=>'ik_max_word',
+                       ],
+                       'content_mark'=>[
+                            'type'=>'text',
+                            'analyzer'=>'ik_max_word',
+                       ],
+                       'cover'=>[
+                           'type'=>'keyword',
+                       ],
+                       'cover_desc'=>[
+                           'type'=>'keyword',
+                       ],
+                       'category_id'=>[
+                           'type'=>'short',
+                       ],
+                       'is_top'=>[
+                           'type'=>'byte',
+                       ],
+                       'score'=>[
+                           'type'=>'short',
+                       ],
+                       'comment'=>[
+                           'type'=>'short',
+                       ],
+                       'created_at'=>[
+                            'type'=>'keyword',
+                       ],
+                       'updated_at'=>[
+                            'type'=>'keyword',
+                       ],
+                       'tags'=>[
+                            'type'=>'nested',
+                            'properties'=>[
+                                'id'=>['type'=>'short'],
+                                'tag_name'=>['type'=>'text','analyzer'=>'ik_max_word'],
+                            ]
+                        ],
+                        'category'=>[
+                            'type'=>'nested',
+                            'properties'=>[
+                                'id'=>['type'=>'short'],
+                                'cate_name'=>['type'=>'text','analyzer'=>'ik_max_word'],
+                            ]
+                        ]
+                   ]
+               ]
+           ]
+        ]
+    ];
+    
+    $response = $client->indices()->create($params);
+    print_r($response);
 });
 Route::post("/test",function(){
     $info = \App\Blog::find(1);
