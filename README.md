@@ -63,7 +63,7 @@ mysql5.6
 3. 导入sql文件
 4. 前台
    - 在home目录中运行 npm install 依赖包（需要node环境）
-   - 运行npm run dev 启动web服务(建议npm run build编译后使用nginx做web服务器)
+   - 运行npm run dev 启动web服务
    - http://localhost:3000
 5. 后台
    - 在admin目录中运行composer install 安装依赖包（需要安装composer）
