@@ -63,11 +63,11 @@ mysql5.6
 3. 导入sql文件
 4. 前台
    - 在home目录中运行 npm install 依赖包（需要node环境）
-   - 运行npm run dev 编译项目
+   - 运行npm run dev 启动web服务(建议npm run build编译后使用nginx做web服务器)
    - http://localhost:3000
 5. 后台
    - 在admin目录中运行composer install 安装依赖包（需要安装composer）
-   - 运行php artisan serve命令,打开web服务器
+   - 运行php artisan serve命令,启动API服务
    - 修改Redis配置文件,搜索"notify-keyspace-events"修改为notify-keyspace-events=”Ex“
    - 运行nohup php artisan image:clear >> image-clear.log 2>&1 & 监听失效的key删除无主文件
 
