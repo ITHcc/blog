@@ -59,8 +59,8 @@ mysql5.6
 ## 安装
 
 1. 使用 git clone下载源码
-2. 修改.env配置文件
-3. 导入sql到数据库
+2. 修改/admin下的.env配置文件
+3. 导入blog.sql文件到数据库
 4. 前台
    - 在home目录中运行 npm install 依赖包（需要node环境）
    - 运行npm run dev 启动web服务
