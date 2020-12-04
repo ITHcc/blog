@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "highlight.js": "^9.13.1",
+    "highlight.js": "^10.4.1",
     "mockjs": "^1.0.1-beta3",
     "vue": "^2.5.2",
     "vue-meta-info": "^0.1.7",
