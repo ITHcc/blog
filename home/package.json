@@ -10,7 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "highlight.js": "^9.13.1",
     "mockjs": "^1.0.1-beta3",
     "vue": "^2.5.2",
