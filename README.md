@@ -4,7 +4,6 @@
 
 一个基于vue全家桶开发的的个人博客
 
-demo: http://www.root2.cn/
 
 ### 前台功能:
 
