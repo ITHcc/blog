@@ -17,7 +17,7 @@
     "vue-meta-info": "^0.1.7",
     "vue-router": "^3.0.2",
     "vuex": "^3.0.1",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.3.12"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
